@@ -96,7 +96,7 @@ export const styleSheet = createStyleSheet('Button', (theme) => {
       },
     },
   };
-}, { index: -10 });
+});
 
 /**
  * Buttons communicate the action that will occur when the user
@@ -121,7 +121,7 @@ export default class Button extends Component {
      */
     className: PropTypes.string,
     /**
-     * Uses a smaller minWidth, ideal for things like card actions
+     * Uses a smaller minWidth, ideal for things like card actions.
      */
     compact: PropTypes.bool,
     /**

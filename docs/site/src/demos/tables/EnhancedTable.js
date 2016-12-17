@@ -27,7 +27,7 @@ const styleSheet = createStyleSheet('EnhancedTable', () => ({
 
 let counter = 0;
 function createData(name, calories, fat, carbs, protein) {
-  counter++;
+  counter += 1;
   return { id: counter, name, calories, fat, carbs, protein };
 }
 
@@ -135,14 +135,14 @@ function EnhancedTableToolbar(props, context) {
       <div className={classes.title}>
         {numSelected > 0 ?
           <Text type="subheading">{numSelected} selected</Text> :
-          <Text type="title">Nutrition</Text>
+            <Text type="title">Nutrition</Text>
         }
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
         {numSelected > 0 ?
           <IconButton>delete</IconButton> :
-          <IconButton>filter_list</IconButton>
+            <IconButton>filter_list</IconButton>
         }
       </div>
     </Toolbar>
