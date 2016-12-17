@@ -6,7 +6,7 @@ import { assert } from 'chai';
 import { createShallowWithContext } from 'test/utils';
 import Dialog, { styleSheet } from './Dialog';
 
-describe('<Dialog>', () => {
+describe('<Dialog />', () => {
   let shallow;
   let classes;
 
@@ -33,7 +33,7 @@ describe('<Dialog>', () => {
         onRequestClose={onRequestClose}
         hideOnBackdropClick={false}
         hideOnEscapeKeyUp={false}
-      />
+      />,
     );
     assert.strictEqual(wrapper.prop('show'), true);
     assert.strictEqual(wrapper.prop('backdropTransitionDuration'), 100);
@@ -46,12 +46,12 @@ describe('<Dialog>', () => {
 
   it('should spread custom props on the paper (dialog "root") node', () => {
     const wrapper = shallow(<Dialog data-my-prop="woof" />);
-    assert.strictEqual(wrapper.find('Paper').prop('data-my-prop'), 'woof', 'custom prop should be woof');
+    assert.strictEqual(wrapper.prop('data-my-prop'), 'woof', 'custom prop should be woof');
   });
 
-  it('should render with the user classes on the paper (dialog "root") node', () => {
+  it('should render with the user classes on the root node', () => {
     const wrapper = shallow(<Dialog className="woof" />);
-    assert.strictEqual(wrapper.find('Paper').hasClass('woof'), true, 'should have the "woof" class');
+    assert.strictEqual(wrapper.hasClass('woof'), true, 'should have the "woof" class');
   });
 
   it('should render Fade > Paper > children inside the Modal', () => {
@@ -62,14 +62,14 @@ describe('<Dialog>', () => {
     assert.strictEqual(
       fade.length === 1 && fade.is('Fade'),
       true,
-      'immediate wrapper child should be Fade'
+      'immediate wrapper child should be Fade',
     );
 
     const paper = fade.childAt(0);
     assert.strictEqual(
       paper.length === 1 && paper.is('Paper'),
       true,
-      'fade child should be Paper'
+      'fade child should be Paper',
     );
 
     assert.strictEqual(paper.hasClass(classes.dialog), true, 'should have the dialog class');
@@ -92,7 +92,26 @@ describe('<Dialog>', () => {
     assert.strictEqual(
       wrapper.find('Fade').prop('transitionAppear'),
       true,
-      'should pass transitionAppear=true to the Fade'
+      'should pass transitionAppear=true to the Fade',
     );
+  });
+
+  describe('prop: paperClassName', () => {
+    it('should add the class on the Paper element', () => {
+      const className = 'foo';
+      const wrapper = shallow(<Dialog paperClassName={className} />);
+      assert.strictEqual(wrapper.find('Paper').hasClass(className), true,
+        'should have the class provided',
+      );
+    });
+  });
+
+  describe('prop: maxWidth', () => {
+    it('should use the right className', () => {
+      const wrapper = shallow(<Dialog maxWidth="xs" />);
+      assert.strictEqual(wrapper.find('Paper').hasClass(classes['dialogWidth-xs']), true,
+        'should have the class provided',
+      );
+    });
   });
 });

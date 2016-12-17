@@ -6,10 +6,11 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import ReactPerf from 'react-addons-perf';
 import { render } from 'react-dom';
-import App from './components/App';
+import App from 'docs/site/src/components/App';
 
+// Warns about potential accessibility issues with your React elements.
+//
 // import a11y from 'react-a11y';
-
 // if (process.env.NODE_ENV !== 'production') {
 //   a11y(React, { includeSrcNode: true, ReactDOM });
 // }
@@ -18,7 +19,10 @@ window.Perf = ReactPerf;
 
 const docs = (state = { dark: false }, action) => {
   if (action.type === 'TOGGLE_THEME_SHADE') {
-    return { ...state, dark: !state.dark };
+    return {
+      ...state,
+      dark: !state.dark,
+    };
   }
   return state;
 };
@@ -33,7 +37,7 @@ render(
       <App />
     </Provider>
   </AppContainer>,
-  rootEl
+  rootEl,
 );
 
 if (process.env.NODE_ENV !== 'production' && module.hot) {
@@ -46,7 +50,7 @@ if (process.env.NODE_ENV !== 'production' && module.hot) {
           <NextApp />
         </Provider>
       </AppContainer>,
-      rootEl
+      rootEl,
     );
   });
 }

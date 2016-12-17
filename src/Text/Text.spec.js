@@ -6,7 +6,7 @@ import { assert } from 'chai';
 import { createShallowWithContext } from 'test/utils';
 import Text, { styleSheet } from './Text';
 
-describe('<Text>', () => {
+describe('<Text />', () => {
   let shallow;
   let classes;
 
@@ -28,7 +28,7 @@ describe('<Text>', () => {
 
   it('should spread props', () => {
     const wrapper = shallow(
-      <Text data-test="hello">Hello</Text>
+      <Text data-test="hello">Hello</Text>,
     );
     assert.strictEqual(wrapper.prop('data-test'), 'hello', 'should be spread on the ButtonBase');
   });
@@ -61,11 +61,19 @@ describe('<Text>', () => {
     'body2',
     'body1',
     'caption',
+    'button',
   ].forEach((type) => {
     it(`should render ${type} text`, () => {
       const wrapper = shallow(<Text type={type}>Hello</Text>);
       assert.ok(classes[type] !== undefined);
       assert.strictEqual(wrapper.hasClass(classes[type]), true, `should be ${type} text`);
+    });
+  });
+
+  describe('prop: colorInherit', () => {
+    it('should inherit the color', () => {
+      const wrapper = shallow(<Text colorInherit>Hello</Text>);
+      assert.strictEqual(wrapper.hasClass(classes.colorInherit), true);
     });
   });
 });

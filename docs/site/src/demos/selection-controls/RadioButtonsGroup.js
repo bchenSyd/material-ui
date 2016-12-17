@@ -2,8 +2,8 @@
 
 import React, { Component, PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
-import { Radio, RadioGroup } from 'material-ui/Radio';
-import Text from 'material-ui/Text';
+import { LabelRadio, RadioGroup } from 'material-ui/Radio';
+import { FormLabel } from 'material-ui/Form';
 
 const styleSheet = createStyleSheet('RadioButtonsGroup', () => ({
   group: {
@@ -29,16 +29,18 @@ export default class RadioButtonsGroup extends Component {
 
     return (
       <div>
-        <Text type="title">Gender</Text>
+        <FormLabel required>Gender</FormLabel>
         <RadioGroup
           aria-label="Gender"
+          name="gender"
           className={classes.group}
           selectedValue={this.state.selectedValue}
           onChange={this.handleChange}
         >
-          <Radio label="Male" value="male" />
-          <Radio label="Female" value="female" />
-          <Radio label="Other" value="other" />
+          <LabelRadio label="Male" value="male" />
+          <LabelRadio label="Female" value="female" />
+          <LabelRadio label="Other" value="other" />
+          <LabelRadio label="Disabled" value="disabled" disabled />
         </RadioGroup>
       </div>
     );

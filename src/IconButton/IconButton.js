@@ -1,11 +1,13 @@
 // @flow weak
 
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
 import ButtonBase from '../internal/ButtonBase';
 
 export const styleSheet = createStyleSheet('IconButton', (theme) => {
+  const { palette, transitions } = theme;
+
   return {
     iconButton: {
       display: 'inline-flex',
@@ -19,12 +21,18 @@ export const styleSheet = createStyleSheet('IconButton', (theme) => {
       padding: 0,
       borderRadius: '50%',
       backgroundColor: 'transparent',
-      color: theme.color,
+      color: palette.action.active,
       zIndex: 1,
-      transition: theme.transition,
+      transition: transitions.create('background-color', '150ms'),
+    },
+    disabled: {
+      color: palette.action.disabled,
+    },
+    accent: {
+      color: palette.accent.A200,
     },
     contrast: {
-      color: theme.contrast,
+      color: palette.getContrastText(palette.primary[500]),
     },
     label: {
       width: '100%',
@@ -37,28 +45,8 @@ export const styleSheet = createStyleSheet('IconButton', (theme) => {
       },
     },
     keyboardFocused: {
-      backgroundColor: theme.focusBackground,
+      backgroundColor: palette.text.divider,
     },
-    primary: {
-      color: theme.primary[500],
-    },
-    accent: {
-      color: theme.accent.A200,
-    },
-  };
-});
-
-styleSheet.registerLocalTheme((theme) => {
-  const { palette, transitions } = theme;
-  return {
-    color: palette.type === 'light' ?
-      palette.text.secondary : palette.text.primary,
-    contrast: palette.type === 'light' ?
-      palette.shades.dark.text.primary : palette.shades.light.text.secondary,
-    primary: palette.primary,
-    accent: palette.accent,
-    transition: transitions.create('background-color', '150ms'),
-    focusBackground: palette.text.divider,
   };
 });
 
@@ -71,58 +59,79 @@ styleSheet.registerLocalTheme((theme) => {
  * const Component = () => <IconButton>delete</IconButton>;
  * ```
  */
-export default class IconButton extends Component {
-  static propTypes = {
-    /**
-     * The icon element. If a string is passed,
-     * it will be used as a material icon font ligature
-     */
-    children: PropTypes.node,
-    /**
-     * The CSS class name of the root element.
-     */
-    className: PropTypes.string,
-    contrast: PropTypes.bool,
-    /**
-     * If true, the button will be disabled.
-     */
-    disabled: PropTypes.bool,
-    /**
-     * If false, the ripple effect will be disabled.
-     */
-    ripple: PropTypes.bool,
-    /**
-     * @ignore
-     */
-    theme: PropTypes.object,
-  };
+export default function IconButton(props, context) {
+  const {
+    accent,
+    buttonRef,
+    children,
+    className,
+    contrast,
+    disabled,
+    ...other
+  } = props;
+  const classes = context.styleManager.render(styleSheet);
 
-  static defaultProps = {
-    ripple: true,
-  };
-
-  static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
-  };
-
-  render() {
-    const { children, className, contrast, theme, ...other } = this.props;
-    const classes = this.context.styleManager.render(styleSheet, theme);
-    return (
-      <ButtonBase
-        className={classNames(classes.iconButton, {
-          [classes.contrast]: contrast,
-        }, className)}
-        centerRipple
-        keyboardFocusedClassName={classes.keyboardFocused}
-        {...other}
-      >
-        <span className={classes.label}>
-          {typeof children === 'string' ?
-            <span className="material-icons">{children}</span> : children
-          }
-        </span>
-      </ButtonBase>
-    );
-  }
+  return (
+    <ButtonBase
+      className={classNames(classes.iconButton, {
+        [classes.accent]: accent,
+        [classes.contrast]: contrast,
+        [classes.disabled]: disabled,
+      }, className)}
+      centerRipple
+      keyboardFocusedClassName={classes.keyboardFocused}
+      disabled={disabled}
+      ref={buttonRef}
+      {...other}
+    >
+      <span className={classNames(classes.label)}>
+        {typeof children === 'string' ?
+          <span className="material-icons">{children}</span> : children
+        }
+      </span>
+    </ButtonBase>
+  );
 }
+
+IconButton.propTypes = {
+  /**
+   * If true, will use the theme's accent color.
+   */
+  accent: PropTypes.bool,
+  /**
+   * @ignore
+   */
+  buttonRef: PropTypes.func,
+  /**
+   * The icon element. If a string is passed,
+   * it will be used as a material icon font ligature.
+   */
+  children: PropTypes.node,
+  /**
+   * The CSS class name of the root element.
+   */
+  className: PropTypes.string,
+  /**
+   * If true, will use the theme's contrast color.
+   */
+  contrast: PropTypes.bool,
+  /**
+   * If `true`, the button will be disabled.
+   */
+  disabled: PropTypes.bool,
+  /**
+   * If false, the ripple effect will be disabled.
+   */
+  ripple: PropTypes.bool,
+};
+
+IconButton.defaultProps = {
+  accent: false,
+  contrast: false,
+  disabled: false,
+  ripple: true,
+};
+
+IconButton.contextTypes = {
+  styleManager: PropTypes.object.isRequired,
+};

@@ -6,7 +6,7 @@ import { assert } from 'chai';
 import { createShallowWithContext } from 'test/utils';
 import TableBody, { styleSheet } from './TableBody';
 
-describe('<TableBody>', () => {
+describe('<TableBody />', () => {
   let shallow;
   let classes;
 
@@ -17,7 +17,7 @@ describe('<TableBody>', () => {
 
   it('should render a tbody', () => {
     const wrapper = shallow(
-      <TableBody />
+      <TableBody />,
     );
     assert.strictEqual(wrapper.is('tbody'), true, 'should be a tbody');
   });

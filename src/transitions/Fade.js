@@ -7,37 +7,38 @@ export default class Fade extends Component {
   static propTypes = {
     children: PropTypes.node,
     /**
-     * Set to true to transition in
+     * Set to true to transition in.
      */
     in: PropTypes.bool,
     /**
-     * Callback fired before the component is entering
+     * Callback fired before the component is entering.
      */
     onEnter: PropTypes.func,
     /**
-     * Callback fired when the component is entering
+     * Callback fired when the component is entering.
      */
     onEntering: PropTypes.func,
     /**
-     * Callback fired when the component has entered
+     * Callback fired when the component has entered.
      */
     onEntered: PropTypes.func, // eslint-disable-line react/sort-prop-types
     /**
-     * Callback fired before the component is exiting
+     * Callback fired before the component is exiting.
      */
     onExit: PropTypes.func,
     /**
-     * Callback fired when the component is exiting
+     * Callback fired when the component is exiting.
      */
     onExiting: PropTypes.func,
     /**
-     * Callback fired when the component has exited
+     * Callback fired when the component has exited.
      */
     onExited: PropTypes.func, // eslint-disable-line react/sort-prop-types
     transitionDuration: PropTypes.number,
   };
 
   static defaultProps = {
+    in: false,
     transitionDuration: 300,
   };
 
@@ -49,7 +50,7 @@ export default class Fade extends Component {
     element.style.opacity = 0;
     element.style.transition = this.context.theme.transitions.create(
       'opacity',
-      `${this.props.transitionDuration}ms`
+      `${this.props.transitionDuration}ms`,
     );
     if (this.props.onEnter) {
       this.props.onEnter();
@@ -77,7 +78,7 @@ export default class Fade extends Component {
       onEntering, // eslint-disable-line no-unused-vars
       onExit, // eslint-disable-line no-unused-vars
       transitionDuration, // eslint-disable-line no-unused-vars
-      ...other,
+      ...other
     } = this.props;
 
     return (

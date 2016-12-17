@@ -11,11 +11,11 @@ import { List } from '../List';
 export default class MenuList extends Component {
   static propTypes = {
     /**
-     * MenuList contents, should be menu items
+     * MenuList contents, should be menu items.
      */
     children: PropTypes.node,
     /**
-     * The CSS class name of the list element.
+     * The CSS class name of the root element.
      */
     className: PropTypes.string,
     /**
@@ -144,14 +144,14 @@ export default class MenuList extends Component {
       className,
       onBlur, // eslint-disable-line no-unused-vars
       onKeyDown, // eslint-disable-line no-unused-vars
-      ...other,
+      ...other
     } = this.props;
 
     return (
       <List
         data-mui-test="MenuList"
         role="menu"
-        ref={(c) => { this.list = c; }}
+        rootRef={(c) => { this.list = c; }}
         className={className}
         onKeyDown={this.handleKeyDown}
         onBlur={this.handleBlur}
@@ -162,7 +162,7 @@ export default class MenuList extends Component {
             tabIndex: index === this.state.currentTabIndex ? '0' : '-1',
             ref: child.props.selected ? ((c) => { this.selectedItem = c; }) : undefined,
             onFocus: this.handleItemFocus,
-          })
+          }),
         )}
       </List>
     );

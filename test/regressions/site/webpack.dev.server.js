@@ -9,14 +9,19 @@ const serverOptions = {
   publicPath: webpackConfig.output.publicPath,
   hot: true,
   historyApiFallback: true,
-  stats: { colors: true },
+  stats: {
+    modules: false,
+    chunks: false,
+    chunkModules: false,
+    colors: true,
+  },
 };
 
 new WebpackDevServer(webpack(webpackConfig), serverOptions)
-  .listen(3000, '0.0.0.0', (err) => {
+  .listen(3333, '0.0.0.0', (err) => {
     if (err) {
       return console.log(err);
     }
 
-    return console.info('Webpack dev server listening at http://0.0.0.0:3000/');
+    return console.info('Webpack dev server listening at http://0.0.0.0:3333/');
   });

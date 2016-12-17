@@ -20,7 +20,7 @@ module.exports = {
     'material-ui',
   ],
   rules: {
-    'array-bracket-spacing': 'off', // use babel plugin rule
+    'array-bracket-spacing': ['error', 'never'],
     'arrow-body-style': 'off',
     'arrow-parens': ['error', 'always'], // airbnb use as-needed
     'consistent-this': ['error', 'self'],
@@ -28,10 +28,10 @@ module.exports = {
     'no-console': 'error', // airbnb is using warn
     'no-param-reassign': 'off',
     'no-prototype-builtins': 'off',
+    'no-use-before-define': ['error', { 'functions': false }], // airbnb have functions: true, annoying
     'object-curly-spacing': 'off', // use babel plugin rule
     'operator-linebreak': ['error', 'after'], // aibnb is disabling this rule
     'babel/object-curly-spacing': ['error', 'always'],
-    'babel/array-bracket-spacing': ['error', 'never'],
     'import/no-unresolved': 'off',
     'import/no-named-as-default': 'off',
     'import/extensions': 'off',

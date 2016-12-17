@@ -7,7 +7,7 @@ import Paper from '../Paper';
 import Modal from '../internal/Modal';
 import Fade from '../transitions/Fade';
 
-export const styleSheet = createStyleSheet('Dialog', () => {
+export const styleSheet = createStyleSheet('Dialog', (theme) => {
   return {
     modal: {
       justifyContent: 'center',
@@ -19,11 +19,19 @@ export const styleSheet = createStyleSheet('Dialog', () => {
       flex: '0 1 auto',
       position: 'relative',
       width: '75%',
-      maxWidth: 960,
       maxHeight: '90vh',
       '&:focus': {
         outline: 'none',
       },
+    },
+    'dialogWidth-xs': {
+      maxWidth: theme.breakpoints.getWidth('xs'),
+    },
+    'dialogWidth-sm': {
+      maxWidth: theme.breakpoints.getWidth('sm'),
+    },
+    'dialogWidth-md': {
+      maxWidth: theme.breakpoints.getWidth('md'),
     },
   };
 });
@@ -46,17 +54,28 @@ export default class Dialog extends Component {
      */
     children: PropTypes.node,
     /**
-     * The CSS class name of the **dialog** root paper element.
+     * The CSS class name of the root element.
      */
     className: PropTypes.string,
     /**
-     * If true, clicking the backdrop will fire the `onRequestClose` callback.
+     * If `true`, clicking the backdrop will fire the `onRequestClose` callback.
      */
     hideOnBackdropClick: PropTypes.bool,
     /**
-     * If true, hitting escape will fire the `onRequestClose` callback.
+     * If `true`, hitting escape will fire the `onRequestClose` callback.
      */
     hideOnEscapeKeyUp: PropTypes.bool,
+    /**
+     * Determine the max width of the dialog.
+     * The dialog width grows with the size of the screen, this property is useful
+     * on the desktop where you might need some coherent different width size across your
+     * application.
+     */
+    maxWidth: PropTypes.oneOf([
+      'xs',
+      'sm',
+      'md',
+    ]),
     /**
      * Callback fires when the backdrop is clicked on.
      */
@@ -98,6 +117,10 @@ export default class Dialog extends Component {
      */
     open: PropTypes.bool,
     /**
+     * The CSS class name of the paper inner element.
+     */
+    paperClassName: PropTypes.string,
+    /**
      * Transition component.
      */
     transition: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
@@ -110,6 +133,7 @@ export default class Dialog extends Component {
   static defaultProps = {
     hideOnBackdropClick: true,
     hideOnEscapeKeyUp: true,
+    maxWidth: 'sm',
     open: false,
     transition: Fade,
     transitionDuration: 300,
@@ -125,6 +149,7 @@ export default class Dialog extends Component {
       className,
       hideOnBackdropClick,
       hideOnEscapeKeyUp,
+      maxWidth,
       open,
       onBackdropClick,
       onEscapeKeyUp,
@@ -135,9 +160,10 @@ export default class Dialog extends Component {
       onExiting,
       onExited,
       onRequestClose,
+      paperClassName,
       transition,
       transitionDuration,
-      ...other,
+      ...other
     } = this.props;
 
     const classes = this.context.styleManager.render(styleSheet);
@@ -164,7 +190,7 @@ export default class Dialog extends Component {
 
     return (
       <Modal
-        className={classes.modal}
+        className={classNames(classes.modal, className)}
         backdropTransitionDuration={transitionDuration}
         hideOnBackdropClick={hideOnBackdropClick}
         hideOnEscapeKeyUp={hideOnEscapeKeyUp}
@@ -172,13 +198,13 @@ export default class Dialog extends Component {
         onEscapeKeyUp={onEscapeKeyUp}
         onRequestClose={onRequestClose}
         show={open}
+        {...other}
       >
         {createTransitionFn(transition, transitionProps, (
           <Paper
             data-mui-test="Dialog"
             zDepth={24}
-            className={classNames(classes.dialog, className)}
-            {...other}
+            className={classNames(classes.dialog, classes[`dialogWidth-${maxWidth}`], paperClassName)}
           >
             {children}
           </Paper>

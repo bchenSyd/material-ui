@@ -6,7 +6,7 @@ import { assert } from 'chai';
 import { createShallowWithContext } from 'test/utils';
 import Avatar, { styleSheet } from './Avatar';
 
-describe('<Avatar>', () => {
+describe('<Avatar />', () => {
   let shallow;
   let classes;
 
@@ -25,7 +25,7 @@ describe('<Avatar>', () => {
           src="something.jpg"
           alt="Hello World!"
           data-my-prop="woof"
-        />
+        />,
       );
     });
 
@@ -65,7 +65,7 @@ describe('<Avatar>', () => {
           icon={<span className="my-icon-font">icon</span>}
           className="my-avatar"
           data-my-prop="woof"
-        />
+        />,
       );
     });
 

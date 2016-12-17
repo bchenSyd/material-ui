@@ -5,7 +5,7 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import Link from 'react-router/lib/Link';
 import Text from 'material-ui/Text';
 import Button from 'material-ui/Button';
-import muiLogo from '../../assets/images/material-ui-logo.svg';
+import muiLogo from 'docs/site/assets/images/material-ui-logo.svg';
 
 export const styleSheet = createStyleSheet('Home', (theme) => {
   const { palette, breakpoints } = theme;
@@ -17,6 +17,7 @@ export const styleSheet = createStyleSheet('Home', (theme) => {
       flex: '1 0 100%',
     },
     hero: {
+      minHeight: '100vh', // Makes the hero full height until we get some more content.
       flex: '0 0 auto',
       display: 'flex',
       justifyContent: 'center',
@@ -35,13 +36,15 @@ export const styleSheet = createStyleSheet('Home', (theme) => {
       marginTop: 20,
     },
     logo: {
-      maxWidth: '180%',
       margin: '20px -40%',
+      width: '100%',
+      height: '40vw',
+      maxHeight: 230,
     },
   };
 });
 
-const Home = (props, context) => {
+function Home(props, context) {
   const classes = context.styleManager.render(styleSheet);
 
   return (
@@ -49,8 +52,10 @@ const Home = (props, context) => {
       <div className={classes.hero}>
         <div className={classes.content}>
           <img src={muiLogo} alt="Material UI Logo" className={classes.logo} />
-          <Text type="display2">Material-UI</Text>
-          <Text type="subheading">
+          <Text type="display2" component="h1" colorInherit>
+            {'Material-UI'}
+          </Text>
+          <Text type="subheading" component="h2" colorInherit>
             {"A React component library implementing Google's Material Design"}
           </Text>
           <Button
@@ -59,13 +64,13 @@ const Home = (props, context) => {
             raised
             to="/getting-started/installation"
           >
-            Get Started
+            {'Get Started'}
           </Button>
         </div>
       </div>
     </div>
   );
-};
+}
 
 Home.contextTypes = {
   styleManager: PropTypes.object.isRequired,

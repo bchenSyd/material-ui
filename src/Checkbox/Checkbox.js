@@ -1,9 +1,8 @@
 // @flow weak
 
-import React, { PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
-import classNames from 'classnames';
-import SwitchBase from '../internal/SwitchBase';
+import { createSwitch } from '../internal/SwitchBase';
+import withSwitchLabel from '../internal/withSwitchLabel';
 
 export const styleSheet = createStyleSheet('Checkbox', (theme) => {
   return {
@@ -13,26 +12,18 @@ export const styleSheet = createStyleSheet('Checkbox', (theme) => {
     checked: {
       color: theme.palette.accent[500],
     },
+    disabled: {
+      color: theme.palette.action.disabled,
+    },
   };
 });
 
-export default function Checkbox(props, context) {
-  const { className, checkedClassName, ...other } = props;
-  const classes = context.styleManager.render(styleSheet);
-  return (
-    <SwitchBase
-      className={classNames(classes.default, className)}
-      checkedClassName={classNames(classes.checked, checkedClassName)}
-      {...other}
-    />
-  );
-}
+const Checkbox = createSwitch({ styleSheet });
 
-Checkbox.propTypes = {
-  checkedClassName: PropTypes.string,
-  className: PropTypes.string,
-};
+Checkbox.displayName = 'Checkbox';
 
-Checkbox.contextTypes = {
-  styleManager: PropTypes.object.isRequired,
-};
+export default Checkbox;
+
+const LabelCheckbox = withSwitchLabel(Checkbox);
+
+export { LabelCheckbox };

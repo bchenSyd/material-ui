@@ -18,6 +18,9 @@ export const styleSheet = createStyleSheet('CardHeader', () => ({
   content: {
     flex: '1 1 auto',
   },
+  contentSecondary: {
+    lineHeight: 1,
+  },
 }));
 
 export default function CardHeader(props, context) {
@@ -26,7 +29,7 @@ export default function CardHeader(props, context) {
     className: classNameProp,
     subhead,
     title,
-    ...other,
+    ...other
   } = props;
 
   const classes = context.styleManager.render(styleSheet);
@@ -39,8 +42,12 @@ export default function CardHeader(props, context) {
           {avatar}
         </div>
         <div className={classes.content}>
-          <Text type="body2" gutterBottom>{title}</Text>
-          <Text type="body2" secondary>{subhead}</Text>
+          <Text type="body2" gutterBottom>
+            {title}
+          </Text>
+          <Text type="body2" secondary className={classes.contentSecondary}>
+            {subhead}
+          </Text>
         </div>
       </CardContent>
     );
@@ -48,14 +55,21 @@ export default function CardHeader(props, context) {
 
   return (
     <CardContent className={className} {...other}>
-      <Text type="headline">{title}</Text>
-      <Text type="body1" secondary>{subhead}</Text>
+      <Text type="headline">
+        {title}
+      </Text>
+      <Text type="body1" secondary>
+        {subhead}
+      </Text>
     </CardContent>
   );
 }
 
 CardHeader.propTypes = {
   avatar: PropTypes.node,
+  /**
+   * The CSS class name of the root element.
+   */
   className: PropTypes.string,
   subhead: PropTypes.string,
   title: PropTypes.string,

@@ -6,7 +6,7 @@ import { spy } from 'sinon';
 import { createShallowWithContext } from 'test/utils';
 import MenuItem, { styleSheet } from './MenuItem';
 
-describe('<MenuItem>', () => {
+describe('<MenuItem />', () => {
   let shallow;
   let classes;
 
@@ -17,7 +17,7 @@ describe('<MenuItem>', () => {
 
   it('should render a button ListItem with no ripple', () => {
     const wrapper = shallow(
-      <MenuItem />
+      <MenuItem />,
     );
     assert.strictEqual(wrapper.is('ListItem'), true, 'should be a ListItem');
     assert.strictEqual(wrapper.prop('button'), true, 'should have the button prop');

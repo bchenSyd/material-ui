@@ -15,7 +15,7 @@ export default function Card(props, context) {
   const {
     className: classNameProp,
     raised,
-    ...other,
+    ...other
   } = props;
   const classes = context.styleManager.render(styleSheet);
   const className = classNames(classes.card, classNameProp);
@@ -26,8 +26,15 @@ export default function Card(props, context) {
 }
 
 Card.propTypes = {
+  /**
+   * The CSS class name of the root element.
+   */
   className: PropTypes.string,
   raised: PropTypes.bool,
+};
+
+Card.defaultProps = {
+  raised: false,
 };
 
 Card.contextTypes = {

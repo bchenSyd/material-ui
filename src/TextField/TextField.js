@@ -19,7 +19,8 @@ export const styleSheet = createStyleSheet('TextField', (theme) => {
         backgroundColor: focusColor,
         left: 0,
         bottom: 9,
-        content: '\'\'',
+        // Doing the other way around crash on IE11 "''"" https://github.com/cssinjs/jss/issues/242
+        content: '""',
         height: 2,
         position: 'absolute',
         width: '100%',
@@ -28,7 +29,7 @@ export const styleSheet = createStyleSheet('TextField', (theme) => {
           'transform',
           '200ms',
           null,
-          easing.easeOut
+          easing.easeOut,
         ),
       },
     },
@@ -41,11 +42,14 @@ export const styleSheet = createStyleSheet('TextField', (theme) => {
       zIndex: 1,
     },
     focused: {
-      '& $label': {
-        color: focusColor,
-      },
       '&:after': {
         transform: 'scaleX(1)',
+      },
+    },
+    error: {
+      '&:after': {
+        backgroundColor: theme.palette.error[500],
+        transform: 'scaleX(1)', // error is always underlined in red
       },
     },
   };
@@ -65,7 +69,7 @@ export const styleSheet = createStyleSheet('TextField', (theme) => {
 export default class TextField extends Component {
   static propTypes = {
     /**
-     * The contents of the `TextField`
+     * The contents of the `TextField`.
      */
     children: PropTypes.node,
     /**
@@ -73,9 +77,13 @@ export default class TextField extends Component {
      */
     className: PropTypes.string,
     /**
-     * Whether this text field is required.
+     * Whether the label should be displayed in an error state.
      */
-    required: PropTypes.bool,
+    error: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    error: false,
   };
 
   static contextTypes = {
@@ -116,36 +124,39 @@ export default class TextField extends Component {
     return child;
   };
 
-  renderInput = (input) =>
+  renderInput = (input) => (
     cloneElement(input, {
       className: classNames(this.classes.input, input.props.className),
       onDirty: this.handleDirty,
       onClean: this.handleClean,
       onFocus: createChainedFunction(this.handleFocus, input.props.onFocus),
       onBlur: createChainedFunction(this.handleBlur, input.props.onBlur),
-    });
+    })
+  );
 
-  renderLabel = (label) =>
+  renderLabel = (label) => (
     cloneElement(label, {
       className: classNames(this.classes.label, label.props.className),
+      error: label.props.hasOwnProperty('error') ? label.props.error : this.props.error,
       focused: this.state.focused,
       shrink: label.props.hasOwnProperty('shrink') ? // Shrink the label if dirty or focused
         label.props.shrink : (this.state.dirty || this.state.focused),
-      required: this.props.required,
-    });
+    })
+  );
 
   render() {
     const {
       children,
       className: classNameProp,
-      ...other,
+      error,
+      ...other
     } = this.props;
 
     this.classes = this.context.styleManager.render(styleSheet);
 
-    const className = classNames({
-      [this.classes.root]: true,
+    const className = classNames(this.classes.root, {
       [this.classes.focused]: this.state.focused,
+      [this.classes.error]: error,
     }, classNameProp);
 
     return (

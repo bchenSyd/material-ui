@@ -6,7 +6,7 @@ import { assert } from 'chai';
 import { createShallowWithContext } from 'test/utils';
 import CardActions, { styleSheet } from './CardActions';
 
-describe('<CardActions>', () => {
+describe('<CardActions />', () => {
   let shallow;
   let classes;
 
@@ -17,7 +17,7 @@ describe('<CardActions>', () => {
 
   it('should render a div with the cardActions class', () => {
     const wrapper = shallow(
-      <CardActions />
+      <CardActions />,
     );
     assert.strictEqual(wrapper.is('div'), true, 'should be a div');
     assert.strictEqual(wrapper.hasClass(classes.cardActions), true, 'should have the cardActions class');
@@ -28,7 +28,7 @@ describe('<CardActions>', () => {
       <CardActions>
         <div id="child1" />
         <div id="child2" />
-      </CardActions>
+      </CardActions>,
     );
 
     assert.strictEqual(wrapper.find('#child1').hasClass(classes.actionSpacing), true);
@@ -40,7 +40,7 @@ describe('<CardActions>', () => {
       <CardActions actionSpacing={false}>
         <div id="child1" />
         <div id="child2" />
-      </CardActions>
+      </CardActions>,
     );
 
     assert.strictEqual(wrapper.find('#child1').hasClass(classes.actionSpacing), false);

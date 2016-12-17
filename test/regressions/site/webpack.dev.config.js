@@ -11,7 +11,7 @@ module.exports = {
     main: [
       'eventsource-polyfill', // hot reloading in IE
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://0.0.0.0:3000',
+      'webpack-dev-server/client?http://0.0.0.0:3333',
       'webpack/hot/only-dev-server',
       './src/index',
     ],
@@ -26,14 +26,17 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['babel'],
+        loader: 'babel',
+      },
+      {
+        test: /\.(jpg|gif|png)$/,
+        loader: 'file',
       },
     ],
   },
   resolve: {
     alias: {
       'material-ui': path.resolve(__dirname, '../../../src'),
-      react: path.resolve(__dirname, '../../../node_modules/react'),
     },
   },
   progress: true,

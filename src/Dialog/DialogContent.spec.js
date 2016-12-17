@@ -6,7 +6,7 @@ import { assert } from 'chai';
 import { createShallowWithContext } from 'test/utils';
 import DialogContent, { styleSheet } from './DialogContent';
 
-describe('<DialogContent>', () => {
+describe('<DialogContent />', () => {
   let shallow;
   let classes;
 
@@ -17,7 +17,7 @@ describe('<DialogContent>', () => {
 
   it('should render a div', () => {
     const wrapper = shallow(
-      <DialogContent />
+      <DialogContent />,
     );
     assert.strictEqual(wrapper.is('div'), true, 'should be a div');
   });
@@ -34,8 +34,8 @@ describe('<DialogContent>', () => {
   });
 
   it('should render children', () => {
-    const children = <p className="test">Hello</p>;
+    const children = <p />;
     const wrapper = shallow(<DialogContent>{children}</DialogContent>);
-    assert.strictEqual(wrapper.childAt(0).equals(children), true);
+    assert.strictEqual(wrapper.children().equals(children), true);
   });
 });

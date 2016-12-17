@@ -39,13 +39,13 @@ export default function Paper(props, context) {
     className: classNameProp,
     rounded,
     zDepth,
-    ...other,
+    ...other
   } = props;
   const classes = context.styleManager.render(styleSheet);
 
-  const className = classNames(classes.paper, {
+  const classNameZDepth = `dp${zDepth >= 0 ? zDepth : 0}`;
+  const className = classNames(classes.paper, classes[classNameZDepth], {
     [classes.rounded]: rounded,
-    [classes[`dp${zDepth >= 0 ? zDepth : 0}`]]: true,
   }, classNameProp);
 
   return (
@@ -59,11 +59,11 @@ Paper.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Set to false to disable rounded corners
+   * Set to false to disable rounded corners.
    */
   rounded: PropTypes.bool,
   /**
-   * Shadow depth, corresponds to `dp` in the spec
+   * Shadow depth, corresponds to `dp` in the spec.
    */
   zDepth: PropTypes.number,
 };

@@ -6,7 +6,7 @@ import { assert } from 'chai';
 import { createShallowWithContext } from 'test/utils';
 import TableHead, { styleSheet } from './TableHead';
 
-describe('<TableHead>', () => {
+describe('<TableHead />', () => {
   let shallow;
   let classes;
 
@@ -17,7 +17,7 @@ describe('<TableHead>', () => {
 
   it('should render a thead', () => {
     const wrapper = shallow(
-      <TableHead />
+      <TableHead />,
     );
     assert.strictEqual(wrapper.is('thead'), true, 'should be a thead');
   });

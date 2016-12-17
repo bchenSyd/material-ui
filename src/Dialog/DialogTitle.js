@@ -20,15 +20,21 @@ export default function DialogTitle(props, context) {
   const {
     children,
     className,
-    ...other,
+    ...other
   } = props;
 
   const classes = context.styleManager.render(styleSheet);
 
   return (
-    <div data-mui-test="DialogTitle" className={classNames(classes.root, className)} {...other}>
+    <div
+      data-mui-test="DialogTitle"
+      className={classNames(classes.root, className)}
+      {...other}
+    >
       {typeof children === 'string' ? (
-        <Text type="title">{children}</Text>
+        <Text type="title">
+          {children}
+        </Text>
       ) : children}
     </div>
   );
@@ -36,6 +42,9 @@ export default function DialogTitle(props, context) {
 
 DialogTitle.propTypes = {
   children: PropTypes.node,
+  /**
+   * The CSS class name of the root element.
+   */
   className: PropTypes.string,
 };
 

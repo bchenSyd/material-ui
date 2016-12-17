@@ -28,6 +28,9 @@ export const EXITING = 4;
 class Transition extends Component {
   static propTypes = {
     children: PropTypes.node,
+    /**
+     * The CSS class name of the root element.
+     */
     className: PropTypes.string,
     /**
      * CSS class or classes applied when the component is entered
@@ -315,7 +318,7 @@ class Transition extends Component {
     const {
       children,
       className,
-      ...other,
+      ...other
     } = this.props;
     Object.keys(Transition.propTypes).forEach((key) => delete other[key]);
 
@@ -338,9 +341,9 @@ class Transition extends Component {
         className: classNames(
           child.props.className,
           className,
-          transitionClassName
+          transitionClassName,
         ),
-      }
+      },
     );
   }
 }

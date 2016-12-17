@@ -6,7 +6,7 @@ import { assert } from 'chai';
 import { createShallowWithContext } from 'test/utils';
 import DialogActions, { styleSheet } from './DialogActions';
 
-describe('<DialogActions>', () => {
+describe('<DialogActions />', () => {
   let shallow;
   let classes;
 
@@ -17,7 +17,7 @@ describe('<DialogActions>', () => {
 
   it('should render a div', () => {
     const wrapper = shallow(
-      <DialogActions />
+      <DialogActions />,
     );
     assert.strictEqual(wrapper.is('div'), true, 'should be a div');
   });
@@ -37,7 +37,7 @@ describe('<DialogActions>', () => {
     const wrapper = shallow(
       <DialogActions>
         <button className="woof">Hello</button>
-      </DialogActions>
+      </DialogActions>,
     );
     const container = wrapper.childAt(0);
     assert.strictEqual(container.hasClass(classes.action), true, 'should have the action wrapper');

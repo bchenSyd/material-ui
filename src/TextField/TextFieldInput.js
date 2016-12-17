@@ -1,8 +1,7 @@
 // @flow weak
 
-import { Component, createElement, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
-import shallowEqual from 'recompose/shallowEqual';
 import classNames from 'classnames';
 
 function isDirty(obj) {
@@ -10,7 +9,6 @@ function isDirty(obj) {
 }
 
 export const styleSheet = createStyleSheet('TextFieldInput', (theme) => {
-  const { palette } = theme;
   return {
     root: {
       font: 'inherit',
@@ -22,6 +20,7 @@ export const styleSheet = createStyleSheet('TextFieldInput', (theme) => {
       background: 'none',
       lineHeight: 1,
       appearance: 'textfield', // Improve type search style.
+      color: theme.palette.text.primary,
       '&:focus': {
         outline: 0,
       },
@@ -30,12 +29,12 @@ export const styleSheet = createStyleSheet('TextFieldInput', (theme) => {
       },
     },
     disabled: {
-      color: palette.text.disabled,
+      color: theme.palette.text.disabled,
       cursor: 'not-allowed',
     },
     underline: {
-      borderBottom: `1px solid ${palette.text.divider}`,
-      '&disabled': {
+      borderBottom: `1px solid ${theme.palette.text.divider}`,
+      '& $disabled': {
         borderBottomStyle: 'dotted',
       },
     },
@@ -71,21 +70,22 @@ export default class TextFieldInput extends Component {
      */
     onDirty: PropTypes.func,
     /**
-     * TextFieldInput type
+     * TextFieldInput type.
      */
     type: PropTypes.string,
     /**
-     * If set to true, the input will have an underline
+     * If set to true, the input will have an underline.
      */
     underline: PropTypes.bool,
     /**
-     * The input value, required for a controlled component
+     * The input value, required for a controlled component.
      */
     value: PropTypes.string,
   };
 
   static defaultProps = {
     component: 'input',
+    disabled: false,
     type: 'text',
     underline: true,
   };
@@ -100,15 +100,10 @@ export default class TextFieldInput extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return (
-      !shallowEqual(this.props, nextProps) ||
-      !shallowEqual(this.context, nextContext)
-    );
-  }
-
   componentWillUpdate(nextProps) {
-    this.checkDirty(nextProps);
+    if (this.isControlled()) {
+      this.checkDirty(nextProps);
+    }
   }
 
   // Holds the input reference
@@ -138,20 +133,19 @@ export default class TextFieldInput extends Component {
   render() {
     const {
       className: classNameProp,
-      component,
+      component: ComponentProp,
       disabled,
       onChange, // eslint-disable-line no-unused-vars
       onDirty, // eslint-disable-line no-unused-vars
       onClean, // eslint-disable-line no-unused-vars
       type,
       underline,
-      ...other,
+      ...other
     } = this.props;
 
     const classes = this.context.styleManager.render(styleSheet);
 
-    const className = classNames({
-      [classes.root]: true,
+    const className = classNames(classes.root, {
       [classes.underline]: underline,
       [classes.disabled]: disabled,
     }, classNameProp);
@@ -164,10 +158,10 @@ export default class TextFieldInput extends Component {
       ...other,
     };
 
-    if (component === 'input' || typeof component === 'function') {
+    if (ComponentProp === 'input' || typeof ComponentProp === 'function') {
       inputProps.type = type;
     }
 
-    return createElement(component, inputProps);
+    return <ComponentProp {...inputProps} />;
   }
 }

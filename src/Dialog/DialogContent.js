@@ -22,7 +22,7 @@ export default function DialogContent(props, context) {
   const {
     children,
     className,
-    ...other,
+    ...other
   } = props;
 
   const classes = context.styleManager.render(styleSheet);
@@ -36,6 +36,9 @@ export default function DialogContent(props, context) {
 
 DialogContent.propTypes = {
   children: PropTypes.node,
+  /**
+   * The CSS class name of the root element.
+   */
   className: PropTypes.string,
 };
 

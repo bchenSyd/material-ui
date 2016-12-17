@@ -48,7 +48,7 @@ export default function TableRow(props, context) {
     children,
     hover,
     selected,
-    ...other,
+    ...other
   } = props;
   const { table, styleManager } = context;
   const classes = styleManager.render(styleSheet);
@@ -84,6 +84,11 @@ TableRow.propTypes = {
    * If set to true, the table row will have the selected shading.
    */
   selected: PropTypes.bool,
+};
+
+TableRow.defaultProps = {
+  hover: false,
+  selected: false,
 };
 
 TableRow.contextTypes = {

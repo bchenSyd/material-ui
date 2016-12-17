@@ -20,9 +20,9 @@ export const styleSheet = createStyleSheet('Ripple', () => ({
     opacity: 0.3,
     transform: 'scale(1, 1)',
     animation: `ripple-enter 550ms ${easing.easeInOut}`,
-    '&fast': {
-      animationDuration: '200ms',
-    },
+  },
+  fast: {
+    animationDuration: '200ms',
   },
   leaving: {
     opacity: 0,
@@ -71,6 +71,9 @@ export const styleSheet = createStyleSheet('Ripple', () => ({
 
 export default class Ripple extends Component {
   static propTypes = {
+    /**
+     * The CSS class name of the root element.
+     */
     className: PropTypes.string,
     pulsate: PropTypes.bool,
     rippleSize: PropTypes.number,

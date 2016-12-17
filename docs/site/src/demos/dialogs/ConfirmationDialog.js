@@ -11,7 +11,7 @@ import {
   DialogActions,
   DialogTitle,
 } from 'material-ui/Dialog';
-import { Radio, RadioGroup } from 'material-ui/Radio';
+import { LabelRadio as Radio, RadioGroup } from 'material-ui/Radio';
 
 const options = [
   'None',
@@ -72,7 +72,7 @@ class ConfirmationDialog extends Component {
     const {
       onRequestClose, // eslint-disable-line no-unused-vars
       selectedValue, // eslint-disable-line no-unused-vars
-      ...other,
+      ...other
     } = this.props;
 
     return (
@@ -82,6 +82,7 @@ class ConfirmationDialog extends Component {
           <RadioGroup
             ref={(c) => { this.radioGroup = c; }}
             aria-label="Gender"
+            name="gender"
             selectedValue={this.state.selectedValue}
             onChange={this.handleChange}
           >
@@ -106,13 +107,12 @@ class ConfirmationDialog extends Component {
 const styleSheet = createStyleSheet('ConfirmationDialogDemo', (theme) => ({
   root: {
     width: '100%',
-    maxWidth: '360px',
+    maxWidth: 360,
     background: theme.palette.background.paper,
   },
   dialog: {
     width: '80%',
-    maxWidth: 320,
-    maxHeight: 450,
+    maxHeight: 435,
   },
 }));
 
@@ -161,7 +161,8 @@ export default class ConfirmationDialogDemo extends Component {
             />
           </ListItem>
           <ConfirmationDialog
-            className={classes.dialog}
+            maxWidth="xs"
+            paperClassName={classes.dialog}
             open={this.state.open}
             onRequestClose={this.handleRequestClose}
             selectedValue={this.state.selectedValue}

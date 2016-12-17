@@ -102,7 +102,7 @@ export default class Popover extends Component {
      */
     getContentAnchorEl: PropTypes.func,
     /**
-     * If true, the Popover will be rendered as a modal with
+     * If `true`, the Popover will be rendered as a modal with
      * scroll locking, focus trapping and a clickaway layer beneath
      */
     modal: PropTypes.bool,
@@ -137,7 +137,7 @@ export default class Popover extends Component {
      */
     onRequestClose: PropTypes.func,
     /**
-     * If true, the popover is visible.
+     * If `true`, the popover is visible.
      */
     open: PropTypes.bool,
     role: PropTypes.string,
@@ -177,7 +177,7 @@ export default class Popover extends Component {
   };
 
   static getScale(value) {
-    return `scale(${value}, ${Math.pow(value, 2)})`;
+    return `scale(${value}, ${value ** 2})`;
   }
 
   autoTransitionDuration = undefined;
@@ -371,7 +371,7 @@ export default class Popover extends Component {
       onExiting,
       onExited,
       zDepth,
-      ...other,
+      ...other
     } = this.props;
 
     const classes = this.context.styleManager.render(styleSheet);

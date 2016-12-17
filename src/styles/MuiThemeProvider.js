@@ -6,6 +6,10 @@ import jssPreset from 'jss-preset-default';
 import { createMuiTheme } from './theme';
 
 export const MUI_SHEET_ORDER = [
+  'Collapse',
+  'Fade',
+  'Slide',
+
   'Backdrop',
   'Modal',
 
@@ -13,24 +17,43 @@ export const MUI_SHEET_ORDER = [
   'TouchRipple',
 
   'ButtonBase',
-  'SwitchBase',
+
+  'FormLabel',
+  'FormGroup',
 
   'Text',
   'Paper',
   'Divider',
 
   'Popover',
-  'Dialog',
 
   'Button',
   'IconButton',
 
+  'SvgIcon',
+
+  'SwitchBase',
   'Switch',
   'Checkbox',
   'Radio',
   'RadioGroup',
+  'SwitchLabel',
+
+  'Dialog',
+  'DialogActions',
+  'DialogContent',
+  'DialogContentText',
+  'DialogTitle',
+
+  'TabIndicator',
+  'Tab',
+  'Tabs',
+
+  'BottomNavigationButton',
+  'BottomNavigation',
 
   'CircularProgress',
+  'LinearProgress',
 
   'AppBar',
   'Drawer',
@@ -38,6 +61,7 @@ export const MUI_SHEET_ORDER = [
   'ListItem',
   'ListItemText',
   'ListItemSecondaryAction',
+  'ListSubheader',
   'List',
 
   'Menu',

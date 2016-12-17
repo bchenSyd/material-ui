@@ -6,15 +6,14 @@ import classNames from 'classnames';
 import ButtonBase from '../internal/ButtonBase';
 
 export const styleSheet = createStyleSheet('Button', (theme) => {
-  const { palette, shadows, transitions } = theme;
-  const { button } = theme.components;
+  const { typography, palette, transitions, shadows } = theme;
 
   return {
-    button: {
-      fontSize: button.fontSize,
-      fontWeight: button.fontWeight,
-      fontFamily: button.fontFamily,
-      textTransform: button.textTransform,
+    root: {
+      fontSize: typography.fontSize,
+      fontWeight: typography.fontWeightMedium,
+      fontFamily: typography.fontFamily,
+      textTransform: 'uppercase',
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -28,14 +27,14 @@ export const styleSheet = createStyleSheet('Button', (theme) => {
       '&:hover': {
         textDecoration: 'none',
         backgroundColor: palette.text.divider,
+        '&$disabled': {
+          backgroundColor: 'transparent',
+        },
       },
     },
     compact: {
       padding: '0 8px',
       minWidth: 64,
-    },
-    disabled: {
-      opacity: 0.4,
     },
     label: {
       width: '100%',
@@ -50,26 +49,30 @@ export const styleSheet = createStyleSheet('Button', (theme) => {
       color: palette.accent.A200,
     },
     contrast: {
-      color: theme.palette.type === 'light' ?
-        theme.palette.shades.dark.primary : theme.palette.shades.light.secondary,
+      color: palette.getContrastText(palette.primary[500]),
     },
     raised: {
       color: palette.getContrastText(palette.grey[300]),
       backgroundColor: palette.grey[300],
       boxShadow: shadows[2],
-      '&keyboardFocused': {
+      '&$keyboardFocused': {
         boxShadow: shadows[6],
-      },
-      '&:hover': {
-        backgroundColor: palette.grey.A100,
       },
       '&:active': {
         boxShadow: shadows[8],
       },
       '&$disabled': {
         boxShadow: shadows[0],
+        backgroundColor: palette.text.divider,
+      },
+      '&:hover': {
+        backgroundColor: palette.grey.A100,
+        '&$disabled': {
+          backgroundColor: palette.text.divider,
+        },
       },
     },
+    keyboardFocused: {},
     raisedPrimary: {
       color: palette.getContrastText(palette.primary[500]),
       backgroundColor: palette.primary[500],
@@ -83,6 +86,12 @@ export const styleSheet = createStyleSheet('Button', (theme) => {
       '&:hover': {
         backgroundColor: palette.accent.A400,
       },
+    },
+    raisedContrast: {
+      color: palette.getContrastText(palette.primary[500]),
+    },
+    disabled: {
+      color: palette.action.disabled,
     },
     fab: {
       borderRadius: '50%',
@@ -109,7 +118,7 @@ export const styleSheet = createStyleSheet('Button', (theme) => {
 export default class Button extends Component {
   static propTypes = {
     /**
-     * If true, the button will use the theme's accent color.
+     * If `true`, the button will use the theme's accent color.
      */
     accent: PropTypes.bool,
     /**
@@ -129,15 +138,19 @@ export default class Button extends Component {
      */
     component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     /**
-     * If true, the button will be disabled.
+     * If true, will use the theme's contrast color.
+     */
+    contrast: PropTypes.bool,
+    /**
+     * If `true`, the button will be disabled.
      */
     disabled: PropTypes.bool,
     /**
-     * If true, well use floating action button styling.
+     * If `true`, well use floating action button styling.
      */
     fab: PropTypes.bool,
     /**
-     * If true, the button will have a keyboard focus ripple.
+     * If `true`, the button will have a keyboard focus ripple.
      * Ripple must also be true.
      */
     focusRipple: PropTypes.bool,
@@ -147,15 +160,15 @@ export default class Button extends Component {
      */
     href: PropTypes.string,
     /**
-     * If true, the button will use the theme's primary color.
+     * If `true`, the button will use the theme's primary color.
      */
     primary: PropTypes.bool,
     /**
-     * If true, the button will use raised styling.
+     * If `true`, the button will use raised styling.
      */
     raised: PropTypes.bool,
     /**
-     * If true, the button will have a ripple.
+     * If `true`, the button will have a ripple.
      */
     ripple: PropTypes.bool,
     /**
@@ -165,10 +178,16 @@ export default class Button extends Component {
   };
 
   static defaultProps = {
+    accent: false,
     component: 'button',
-    ripple: true,
+    compact: false,
+    contrast: false,
+    disabled: false,
+    fab: false,
     focusRipple: true,
+    primary: false,
     raised: false,
+    ripple: true,
     type: 'button',
   };
 
@@ -182,23 +201,26 @@ export default class Button extends Component {
       children,
       className: classNameProp,
       compact,
+      contrast,
       disabled,
       fab,
       primary,
       raised,
-      ...other,
+      ...other
     } = this.props;
 
     const classes = this.context.styleManager.render(styleSheet);
     const flat = !raised && !fab;
     const className = classNames({
-      [classes.button]: true,
+      [classes.root]: true,
       [classes.raised]: raised || fab,
       [classes.fab]: fab,
       [classes.primary]: flat && primary,
       [classes.accent]: flat && accent,
+      [classes.contrast]: flat && contrast,
       [classes.raisedPrimary]: !flat && primary,
       [classes.raisedAccent]: !flat && accent,
+      [classes.raisedContrast]: !flat && contrast,
       [classes.compact]: compact,
       [classes.disabled]: disabled,
     }, classNameProp);
@@ -210,7 +232,9 @@ export default class Button extends Component {
         keyboardFocusedClassName={classes.keyboardFocused}
         {...other}
       >
-        <span className={classes.label}>{children}</span>
+        <span className={classes.label}>
+          {children}
+        </span>
       </ButtonBase>
     );
   }

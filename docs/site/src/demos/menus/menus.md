@@ -1,6 +1,6 @@
 # Menus
 
-Menus display a list of choices on a transient sheet of material.
+[Menus](https://material.google.com/components/menus.html) display a list of choices on a transient sheet of material.
 
 Menus appear upon interaction with a button, action, or other control. They display a list of choices, with one choice per line.
 
@@ -16,11 +16,11 @@ Choosing an option should immediately ideally commit the option and close the me
 
 **Disambiguation**: In contrast to simple menus, simple dialogs can present additional detail related to the options available for a list item or provide navigational or orthogonal actions related to the primary task. Although they can display the same content, simple menus are preferred over simple dialogs because simple menus are less disruptive to the user’s current context.
 
-{{demo='menus/SimpleMenu.js'}}
+{{demo='demos/menus/SimpleMenu.js'}}
 
 If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element. The currently selected menu item is set using the `selected` prop.
 
-{{demo='menus/SimpleListMenu.js'}}
+{{demo='demos/menus/SimpleListMenu.js'}}
 
 If text in a simple menu wraps to a second line, use a simple dialog instead. Simple dialogs can have rows with varying heights.
 

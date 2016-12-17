@@ -1,9 +1,8 @@
 // @flow weak
 
-import React, { PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
-import classNames from 'classnames';
-import SwitchBase from '../internal/SwitchBase';
+import { createSwitch } from '../internal/SwitchBase';
+import withSwitchLabel from '../internal/withSwitchLabel';
 
 export const styleSheet = createStyleSheet('Radio', (theme) => {
   return {
@@ -13,61 +12,23 @@ export const styleSheet = createStyleSheet('Radio', (theme) => {
     checked: {
       color: theme.palette.accent[500],
     },
-    label: {
-      marginLeft: -12,
-      display: 'flex',
-      alignItems: 'center',
-      cursor: 'pointer',
+    disabled: {
+      color: theme.palette.action.disabled,
     },
   };
 });
 
-export default function Radio(props, context) {
-  const {
-    className,
-    checkedClassName,
-    label,
-    onChange,
-    value,
-    ...other,
-  } = props;
+const Radio = createSwitch({
+  styleSheet,
+  inputType: 'radio',
+  defaultIcon: 'radio_button_unchecked',
+  defaultCheckedIcon: 'radio_button_checked',
+});
 
-  const classes = context.styleManager.render(styleSheet);
+Radio.displayName = 'Radio';
 
-  const switchProps = {
-    className: classNames(classes.default, className),
-    checkedClassName: classNames(classes.checked, checkedClassName),
-    icon: 'radio_button_unchecked',
-    checkedIcon: 'radio_button_checked',
-    type: 'radio',
-    value,
-    onChange,
-    ...other,
-  };
+export default Radio;
 
-  if (label) {
-    switchProps['aria-label'] = label;
-    return (
-      <label className={classes.label} role="presentation">
-        <SwitchBase {...switchProps} />
-        <span aria-hidden="true" role="presentation">{label}</span>
-      </label>
-    );
-  }
+const LabelRadio = withSwitchLabel(Radio);
 
-  return <SwitchBase {...switchProps} />;
-}
-
-
-Radio.propTypes = {
-  checkedClassName: PropTypes.string,
-  className: PropTypes.string,
-  label: PropTypes.string,
-  name: PropTypes.string,
-  onChange: PropTypes.func,
-  value: PropTypes.string,
-};
-
-Radio.contextTypes = {
-  styleManager: PropTypes.object.isRequired,
-};
+export { LabelRadio };

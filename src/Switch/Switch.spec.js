@@ -4,9 +4,9 @@
 import React from 'react';
 import { assert } from 'chai';
 import { createShallowWithContext } from 'test/utils';
-import Switch, { styleSheet } from './Switch';
+import Switch, { LabelSwitch, styleSheet } from './Switch';
 
-describe('<Switch>', () => {
+describe('<Switch />', () => {
   let shallow;
   let classes;
 
@@ -15,33 +15,47 @@ describe('<Switch>', () => {
     classes = shallow.context.styleManager.render(styleSheet);
   });
 
-  it('should render a SwitchBase inside a div', () => {
-    const wrapper = shallow(
-      <Switch />
-    );
-    assert.strictEqual(wrapper.is('div'), true, 'should be a div');
-    assert.strictEqual(wrapper.hasClass(classes.root), true, 'should have the root class');
-    assert.strictEqual(wrapper.childAt(0).is('SwitchBase'), true, 'should be a SwitchBase');
+  describe('styleSheet', () => {
+    it('should have the classes required for SwitchBase', () => {
+      assert.strictEqual(typeof classes.default, 'string');
+      assert.strictEqual(typeof classes.checked, 'string');
+      assert.strictEqual(typeof classes.disabled, 'string');
+    });
   });
 
-  it('should render with the default and checked classes', () => {
-    const wrapper = shallow(<Switch checked className="woof" checkedClassName="meow" />);
-    assert.strictEqual(wrapper.childAt(0).hasClass('woof'), true, 'should have the "woof" class');
-    assert.strictEqual(wrapper.childAt(0).hasClass(classes.default), true, 'should have the default class');
-    assert.strictEqual(
-      wrapper.childAt(0).prop('checkedClassName').indexOf('meow') !== -1,
-      true,
-      'should have the "meow" class'
-    );
-    assert.strictEqual(
-      wrapper.childAt(0).prop('checkedClassName').indexOf(classes.checked) !== -1,
-      true,
-      'should have the checked class'
-    );
+  describe('default Switch export', () => {
+    let wrapper;
+
+    beforeEach(() => {
+      wrapper = shallow(<Switch className="foo" />);
+    });
+
+    it('should render a div with the root and user classes', () => {
+      assert.strictEqual(wrapper.is('div'), true);
+      assert.strictEqual(wrapper.hasClass(classes.root), true);
+      assert.strictEqual(wrapper.hasClass('foo'), true);
+    });
+
+    it('should render SwitchBase with a custom div icon with the icon class', () => {
+      const switchBase = wrapper.childAt(0);
+
+      assert.strictEqual(switchBase.is('SwitchBase'), true);
+      assert.strictEqual(switchBase.prop('icon').type, 'div');
+      assert.strictEqual(switchBase.prop('icon').props.className, classes.icon);
+    });
+
+    it('should render the bar as the 2nd child', () => {
+      const bar = wrapper.childAt(1);
+
+      assert.strictEqual(bar.is('div'), true);
+      assert.strictEqual(bar.hasClass(classes.bar), true);
+    });
   });
 
-  it('should spread custom props on the SwitchBase node', () => {
-    const wrapper = shallow(<Switch data-my-prop="woof" />);
-    assert.strictEqual(wrapper.childAt(0).prop('data-my-prop'), 'woof', 'custom prop should be woof');
+  describe('named LabelSwitch export', () => {
+    it('should be Switch wrapped with SwitchLabel', () => {
+      assert.strictEqual(LabelSwitch.name, 'SwitchLabel');
+      assert.strictEqual(LabelSwitch.displayName, 'withSwitchLabel(Switch)');
+    });
   });
 });

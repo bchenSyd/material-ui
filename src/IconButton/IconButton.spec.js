@@ -6,7 +6,7 @@ import { assert } from 'chai';
 import { createShallowWithContext } from 'test/utils';
 import IconButton, { styleSheet } from './IconButton';
 
-describe('<IconButton>', () => {
+describe('<IconButton />', () => {
   let shallow;
   let classes;
 
@@ -35,7 +35,7 @@ describe('<IconButton>', () => {
     assert.strictEqual(
       icon.hasClass('material-icons'),
       true,
-      'should have the material icons class'
+      'should have the material icons class',
     );
   });
 
@@ -54,7 +54,7 @@ describe('<IconButton>', () => {
 
   it('should spread props on ButtonBase', () => {
     const wrapper = shallow(
-      <IconButton data-test="hello" ripple={false}>book</IconButton>
+      <IconButton data-test="hello" ripple={false}>book</IconButton>,
     );
     assert.strictEqual(wrapper.prop('data-test'), 'hello', 'should be spread on the ButtonBase');
     assert.strictEqual(wrapper.prop('ripple'), false, 'should disable the ButtonBase ripple');
@@ -69,5 +69,13 @@ describe('<IconButton>', () => {
   it('should pass centerRipple={true} to ButtonBase', () => {
     const wrapper = shallow(<IconButton>book</IconButton>);
     assert.strictEqual(wrapper.prop('centerRipple'), true, 'should set centerRipple to true');
+  });
+
+  describe('prop: disabled', () => {
+    it('should disable the component', () => {
+      const wrapper = shallow(<IconButton disabled>book</IconButton>);
+      assert.strictEqual(wrapper.props().disabled, true, 'should pass the property down the tree');
+      assert.strictEqual(wrapper.hasClass(classes.disabled), true, 'should add the disabled class');
+    });
   });
 });

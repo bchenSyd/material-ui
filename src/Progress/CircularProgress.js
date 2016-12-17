@@ -53,6 +53,9 @@ export const styleSheet = createStyleSheet('CircularProgress', (theme) => {
 
 export default class CircularProgress extends Component {
   static propTypes = {
+    /**
+     * The CSS class name of the root element.
+     */
     className: PropTypes.string,
     /**
      * The mode of show your progress, indeterminate
@@ -83,7 +86,7 @@ export default class CircularProgress extends Component {
       className,
       mode, // eslint-disable-line no-unused-vars
       size,
-      ...other,
+      ...other
     } = this.props;
     const classes = this.context.styleManager.render(styleSheet);
     const radius = size / 2;

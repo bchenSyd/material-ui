@@ -5,7 +5,7 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
 import Text from '../Text';
 
-export const styleSheet = createStyleSheet('ListItemText', (theme) => {
+export const styleSheet = createStyleSheet('ListItemText', () => {
   return {
     root: {
       flex: '1 1 auto',
@@ -13,9 +13,6 @@ export const styleSheet = createStyleSheet('ListItemText', (theme) => {
       '&:first-child': {
         paddingLeft: 0,
       },
-    },
-    secondary: {
-      color: theme.palette.text.secondary,
     },
   };
 });
@@ -25,7 +22,7 @@ export default function ListItemText(props, context) {
     className: classNameProp,
     primary,
     secondary,
-    ...other,
+    ...other
   } = props;
   const classes = context.styleManager.render(styleSheet);
   const className = classNames(classes.root, classNameProp);
@@ -34,22 +31,34 @@ export default function ListItemText(props, context) {
     <div className={className} {...other}>
       {primary && (
         typeof primary === 'string' ? (
-          <Text type="subheading">{primary}</Text>
-        ) : { primary }
+          <Text type="subheading">
+            {primary}
+          </Text>
+        ) : primary
       )}
       {secondary && (
         typeof secondary === 'string' ? (
-          <Text className={classes.secondary} type="body1">{secondary}</Text>
-        ) : { secondary }
+          <Text secondary type="body1">
+            {secondary}
+          </Text>
+        ) : secondary
       )}
     </div>
   );
 }
 
 ListItemText.propTypes = {
+  /**
+   * The CSS class name of the root element.
+   */
   className: PropTypes.string,
   primary: PropTypes.node,
   secondary: PropTypes.node,
+};
+
+ListItemText.defaultProps = {
+  primary: false,
+  secondary: false,
 };
 
 ListItemText.contextTypes = {

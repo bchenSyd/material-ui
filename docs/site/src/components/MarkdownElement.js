@@ -4,8 +4,7 @@ import React, { Component, PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
 import marked from 'marked';
-
-import prism from '../utils/prism';
+import prism from 'docs/site/src/utils/prism';
 
 const styleSheet = createStyleSheet('MarkdownElement', (theme) => ({
   markdownElement: {
@@ -19,6 +18,11 @@ const styleSheet = createStyleSheet('MarkdownElement', (theme) => ({
     },
     '& h2': {
       ...theme.typography.display1,
+      color: theme.palette.text.secondary,
+      margin: '1em 0 0.7em',
+    },
+    '& h3': {
+      ...theme.typography.headline,
       color: theme.palette.text.secondary,
       margin: '1em 0 0.7em',
     },
@@ -36,16 +40,17 @@ const styleSheet = createStyleSheet('MarkdownElement', (theme) => ({
     },
     '& thead': {
       fontSize: 12,
-      fontWeight: 500,
+      fontWeight: theme.typography.fontWeightMedium,
       color: theme.palette.text.secondary,
     },
     '& tbody': {
       fontSize: 13,
+      lineHeight: 1.5,
       color: theme.palette.text.primary,
     },
     '& td': {
       borderBottom: `1px solid ${theme.palette.text.lightDivider}`,
-      padding: '0 56px 0 24px',
+      padding: '8px 56px 8px 24px',
       textAlign: 'left',
     },
     '& td:last-child': {
@@ -71,6 +76,9 @@ const styleSheet = createStyleSheet('MarkdownElement', (theme) => ({
     },
     '& thead tr': {
       height: 64,
+    },
+    '& strong': {
+      fontWeight: theme.typography.fontWeightMedium,
     },
   },
 }));

@@ -3,7 +3,8 @@
 import React, { PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
-import SwitchBase from '../internal/SwitchBase';
+import { createSwitch } from '../internal/SwitchBase';
+import withSwitchLabel from '../internal/withSwitchLabel';
 
 export const styleSheet = createStyleSheet('Switch', (theme) => {
   const { palette } = theme;
@@ -12,6 +13,25 @@ export const styleSheet = createStyleSheet('Switch', (theme) => {
       display: 'inline-flex',
       width: 62,
       position: 'relative',
+    },
+    default: {
+      color: palette.type === 'light' ? palette.grey[50] : palette.grey[400],
+      transition: theme.transitions.create('transform', '150ms'),
+    },
+    checked: {
+      color: palette.accent[500],
+      transform: 'translateX(14px)',
+      '& + $bar': {
+        backgroundColor: palette.accent[500],
+        opacity: 0.5,
+      },
+    },
+    disabled: {
+      color: palette.type === 'light' ? palette.grey[400] : palette.grey[800],
+      '& + $bar': {
+        backgroundColor: palette.type === 'light' ? '#000' : '#fff',
+        opacity: palette.type === 'light' ? 0.12 : 0.1,
+      },
     },
     bar: {
       borderRadius: 7,
@@ -23,30 +43,11 @@ export const styleSheet = createStyleSheet('Switch', (theme) => {
       marginTop: -7,
       left: '50%',
       marginLeft: -17,
-      backgroundColor: palette.type === 'light' ? '#000' : '#fff',
-      opacity: 0.38,
       transition: theme.transitions.multi(['opacity', 'background-color'], '150ms'),
-    },
-    default: {
-      color: palette.text.secondary,
-      transition: theme.transitions.create('transform', '150ms'),
-    },
-    checked: {
-      color: palette.accent[500],
-      transform: 'translateX(14px)',
-      '& + $bar': {
-        backgroundColor: palette.accent[500],
-        opacity: 0.5,
-      },
+      backgroundColor: palette.type === 'light' ? '#000' : '#fff',
+      opacity: palette.type === 'light' ? 0.38 : 0.3,
     },
     icon: {
-      boxShadow: theme.shadows[1],
-      backgroundColor: palette.type === 'light' ? palette.grey[50] : palette.grey[400],
-      width: 20,
-      height: 20,
-      borderRadius: '50%',
-    },
-    iconChecked: {
       boxShadow: theme.shadows[1],
       backgroundColor: 'currentColor',
       width: 20,
@@ -56,29 +57,36 @@ export const styleSheet = createStyleSheet('Switch', (theme) => {
   };
 });
 
-export default function Switch(props, context) {
-  const { className, checkedClassName, ...other } = props;
+const SwitchBase = createSwitch({ styleSheet });
+
+function Switch(props, context) {
+  const {
+    className,
+    ...other
+  } = props;
+
   const classes = context.styleManager.render(styleSheet);
+  const icon = <div className={classes.icon} />;
+
   return (
-    <div className={classes.root}>
-      <SwitchBase
-        className={classNames(classes.default, className)}
-        checkedClassName={classNames(classes.checked, checkedClassName)}
-        icon={<div className={classes.icon} />}
-        checkedIcon={<div className={classes.iconChecked} />}
-        type="checkbox"
-        {...other}
-      />
+    <div className={classNames(classes.root, className)}>
+      <SwitchBase icon={icon} checkedIcon={icon} {...other} />
       <div className={classes.bar} />
     </div>
   );
 }
 
 Switch.propTypes = {
-  checkedClassName: PropTypes.string,
   className: PropTypes.string,
 };
 
 Switch.contextTypes = {
   styleManager: PropTypes.object.isRequired,
 };
+
+
+export default Switch;
+
+const LabelSwitch = withSwitchLabel(Switch);
+
+export { LabelSwitch };

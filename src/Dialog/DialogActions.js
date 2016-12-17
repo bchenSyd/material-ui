@@ -25,6 +25,9 @@ export const styleSheet = createStyleSheet('DialogActions', () => {
 export default class DialogActions extends Component {
   static propTypes = {
     children: PropTypes.node,
+    /**
+     * The CSS class name of the root element.
+     */
     className: PropTypes.string,
   };
 
@@ -38,7 +41,7 @@ export default class DialogActions extends Component {
     <div className={this.classes.action}>
       {React.cloneElement(
         button,
-        { className: classNames(this.classes.button, button.props.className) }
+        { className: classNames(this.classes.button, button.props.className) },
       )}
     </div>
   );
@@ -47,7 +50,7 @@ export default class DialogActions extends Component {
     const {
       children,
       className,
-      ...other,
+      ...other
     } = this.props;
 
     this.classes = this.context.styleManager.render(styleSheet);

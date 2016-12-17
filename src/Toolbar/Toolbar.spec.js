@@ -9,7 +9,7 @@ import Toolbar, { styleSheet } from './Toolbar';
 /**
  * An item that goes in lists.
  */
-describe('<Toolbar>', () => {
+describe('<Toolbar />', () => {
   let shallow;
   let classes;
 
@@ -20,7 +20,7 @@ describe('<Toolbar>', () => {
 
   it('should render a div', () => {
     const wrapper = shallow(
-      <Toolbar />
+      <Toolbar />,
     );
     assert.strictEqual(wrapper.is('div'), true, 'should be a div');
   });

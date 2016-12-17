@@ -6,7 +6,7 @@ import { assert } from 'chai';
 import { createShallowWithContext } from 'test/utils';
 import TouchRipple, { styleSheet } from './TouchRipple';
 
-describe('<TouchRipple>', () => {
+describe('<TouchRipple />', () => {
   let shallow;
   let classes;
 
@@ -28,7 +28,7 @@ describe('<TouchRipple>', () => {
 
   it('should render the custom className', () => {
     const wrapper = shallow(
-      <TouchRipple className="test-class-name" />
+      <TouchRipple className="test-class-name" />,
     );
     assert.strictEqual(wrapper.is('.test-class-name'), true, 'should contain the test className');
   });

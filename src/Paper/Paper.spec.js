@@ -6,7 +6,7 @@ import { assert } from 'chai';
 import { createShallowWithContext } from 'test/utils';
 import Paper, { styleSheet } from './Paper';
 
-describe('<Paper>', () => {
+describe('<Paper />', () => {
   let shallow;
   let classes;
 
@@ -17,7 +17,7 @@ describe('<Paper>', () => {
 
   it('should render a div', () => {
     const wrapper = shallow(
-      <Paper>Hello World</Paper>
+      <Paper>Hello World</Paper>,
     );
     assert.strictEqual(wrapper.is('div'), true, 'should be a div');
   });
