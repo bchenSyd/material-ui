@@ -4,7 +4,7 @@ module.exports = {
       .maximizeWindow()
       .url(browser.launch_url)
       .waitForElementVisible('[data-reactroot]', 6000)
-      .assert.elementPresent('img[class^=home__logo]')
+      .assert.elementPresent('img[class^=Home-logo]')
       .end();
   },
 };

@@ -2,9 +2,13 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const chalk = require('chalk');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+
 
 module.exports = {
   context: path.resolve(__dirname),
+  
   entry: {
     main: [
       './src/index',
@@ -13,7 +17,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
-    publicPath: 'build/',
+    publicPath: '/build/',
   },
   module: {
     loaders: [
@@ -48,7 +52,7 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
+    // new webpack.optimize.DedupePlugin(),  //==========> when running from test:e2e, got error:  ChunkRenderError: No template for dependency: TemplateArgumentDependency
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
@@ -62,5 +66,23 @@ module.exports = {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
+    new ProgressBarPlugin({
+      format: ' building [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
+      clear: false
+    }),
+    function onDonePlugin()
+    {
+        this.plugin("done", function(stats)
+        {
+            if (stats.compilation.errors && stats.compilation.errors.length && process.argv.indexOf('--watch') == -1)
+            {
+                console.log(stats.compilation.errors);
+                process.exit(1); // or throw new Error('webpack build failed.');
+            }
+            // ...
+        });
+    }
   ],
+  // bail: true, // this takes presidence over onDonePlugin above;
 };
+

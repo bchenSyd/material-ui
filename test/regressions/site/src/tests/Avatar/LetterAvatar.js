@@ -4,11 +4,15 @@ import React from 'react';
 import Avatar from 'material-ui/Avatar';
 import { deepOrange } from 'material-ui/styles/colors';
 
-export default function ImageAvatar() {
+export default function LetterAvatar() {
   return (
     <Avatar
-      icon="N"
-      style={{ color: '#fff', backgroundColor: deepOrange[500] }}
-    />
+      style={{
+        color: '#fff',
+        backgroundColor: deepOrange[500],
+      }}
+    >
+      N
+    </Avatar>
   );
 }

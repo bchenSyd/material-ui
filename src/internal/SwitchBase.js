@@ -1,9 +1,12 @@
 // @flow weak
 
 import React, { Component, PropTypes } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
+import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from '../utils/customPropTypes';
 import IconButton from '../IconButton';
+import CheckBoxOutlineBlankIcon from '../svg-icons/check-box-outline-blank';
+import CheckBoxIcon from '../svg-icons/check-box';
 
 export const styleSheet = createStyleSheet('SwitchBase', () => {
   return {
@@ -27,8 +30,8 @@ export const styleSheet = createStyleSheet('SwitchBase', () => {
 });
 
 export function createSwitch({
-  defaultIcon = 'check_box_outline_blank',
-  defaultCheckedIcon = 'check_box',
+  defaultIcon = <CheckBoxOutlineBlankIcon aria-hidden="true" />,
+  defaultCheckedIcon = <CheckBoxIcon aria-hidden="true" />,
   inputType = 'checkbox',
   styleSheet: switchStyleSheet,
 } = {}) {
@@ -88,7 +91,7 @@ export function createSwitch({
     };
 
     static contextTypes = {
-      styleManager: PropTypes.object.isRequired,
+      styleManager: customPropTypes.muiRequired,
     };
 
     state = {};
@@ -99,7 +102,9 @@ export function createSwitch({
       this.isControlled = props.checked !== undefined;
 
       if (!this.isControlled) { // not controlled, use internal state
-        this.setState({ checked: props.defaultChecked !== undefined ? props.defaultChecked : false });
+        this.setState({
+          checked: props.defaultChecked !== undefined ? props.defaultChecked : false,
+        });
       }
     }
 
@@ -144,10 +149,10 @@ export function createSwitch({
         ...other
       } = this.props;
 
-
       const checked = this.isControlled ? checkedProp : this.state.checked;
       const classes = this.context.styleManager.render(styleSheet);
-      const switchClasses = switchStyleSheet ? this.context.styleManager.render(switchStyleSheet) : {};
+      const switchClasses = switchStyleSheet ?
+        this.context.styleManager.render(switchStyleSheet) : {};
 
       const className = classNames(classes.root, switchClasses.default, classNameProp, {
         [classNames(switchClasses.checked, checkedClassName)]: checked,

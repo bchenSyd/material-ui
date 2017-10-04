@@ -1,8 +1,9 @@
 // @flow weak
 
 import React, { Component, PropTypes, cloneElement, isValidElement } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
+import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from '../utils/customPropTypes';
 import ButtonBase from '../internal/ButtonBase';
 
 export const styleSheet = createStyleSheet('BottomNavigationButton', (theme) => {
@@ -44,6 +45,7 @@ export const styleSheet = createStyleSheet('BottomNavigationButton', (theme) => 
     },
     icon: {
       display: 'block',
+      margin: 'auto',
     },
   };
 });
@@ -85,7 +87,7 @@ export default class BottomNavigationButton extends Component {
   };
 
   static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
+    styleManager: customPropTypes.muiRequired,
   };
 
   handleChange = (event) => {
@@ -110,15 +112,19 @@ export default class BottomNavigationButton extends Component {
       ...other
     } = this.props;
     const classes = this.context.styleManager.render(styleSheet);
+
     const className = classNames(classes.root, {
       [classes.selected]: selected,
       [classes.selectedIconOnly]: !showLabelProp && !selected,
     }, classNameProp);
+
     const iconClassName = classNames(classes.icon,
       isValidElement(iconProp) ? iconProp.props.className : null);
+
     const icon = isValidElement(iconProp) ?
       cloneElement(iconProp, { className: iconClassName }) :
       <span className="material-icons">{iconProp}</span>;
+
     const labelClassName = classNames(classes.label, {
       [classes.selectedLabel]: selected,
       [classes.hiddenLabel]: !showLabelProp && !selected,

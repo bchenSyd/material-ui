@@ -8,6 +8,9 @@ import {
 
 export default class Portal extends Component {
   static propTypes = {
+    /**
+     * The content of the component.
+     */
     children: PropTypes.node,
     container: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     open: PropTypes.bool,
@@ -40,7 +43,9 @@ export default class Portal extends Component {
       return;
     }
     unmountComponentAtNode(this.layer);
-    document.body.removeChild(this.layer);
+    if (document.body) {
+      document.body.removeChild(this.layer);
+    }
     this.layer = null;
   }
 
@@ -51,7 +56,9 @@ export default class Portal extends Component {
       if (!this.layer) {
         this.layer = document.createElement('div');
         this.layer.setAttribute('data-mui-portal', 'true');
-        document.body.appendChild(this.layer);
+        if (document.body) {
+          document.body.appendChild(this.layer);
+        }
       }
 
       /**

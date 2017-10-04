@@ -1,7 +1,8 @@
 // @flow weak
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from 'material-ui/utils/customPropTypes';
 import {
   List,
   ListItem,
@@ -10,18 +11,20 @@ import {
   ListSubheader,
 } from 'material-ui/List';
 import Switch from 'material-ui/Switch';
+import WifiIcon from 'material-ui/svg-icons/wifi';
+import BluetoothIcon from 'material-ui/svg-icons/bluetooth';
 
-const styleSheet = createStyleSheet('CheckboxList', (theme) => ({
+const styleSheet = createStyleSheet('SwitchListSecondary', (theme) => ({
   root: {
     width: '100%',
-    maxWidth: '360px',
+    maxWidth: 360,
     background: theme.palette.background.paper,
   },
 }));
 
-export default class CheckboxList extends Component {
+export default class SwitchListSecondary extends Component {
   static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
+    styleManager: customPropTypes.muiRequired,
   };
 
   state = {
@@ -51,7 +54,7 @@ export default class CheckboxList extends Component {
       <div className={classes.root}>
         <List subheader={<ListSubheader>Settings</ListSubheader>}>
           <ListItem>
-            <span className="material-icons">wifi</span>
+            <WifiIcon />
             <ListItemText primary="Wi-Fi" />
             <ListItemSecondaryAction>
               <Switch
@@ -61,7 +64,7 @@ export default class CheckboxList extends Component {
             </ListItemSecondaryAction>
           </ListItem>
           <ListItem>
-            <span className="material-icons">bluetooth</span>
+            <BluetoothIcon />
             <ListItemText primary="Bluetooth" />
             <ListItemSecondaryAction>
               <Switch

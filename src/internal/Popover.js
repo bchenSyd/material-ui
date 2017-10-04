@@ -1,10 +1,10 @@
 // @flow weak
 
 import React, { Component, PropTypes } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
+import { createStyleSheet } from 'jss-theme-reactor';
 import contains from 'dom-helpers/query/contains';
-import customPropTypes from '../utils/propTypes';
+import customPropTypes from '../utils/customPropTypes';
 import Modal from './Modal';
 import Transition from './Transition';
 import Paper from '../Paper';
@@ -74,7 +74,7 @@ export default class Popover extends Component {
      */
     anchorOrigin: customPropTypes.origin,
     /**
-     * The content of the popover.
+     * The content of the component.
      */
     children: PropTypes.node,
     /**
@@ -173,7 +173,7 @@ export default class Popover extends Component {
   };
 
   static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
+    styleManager: customPropTypes.muiRequired,
   };
 
   static getScale(value) {
@@ -230,7 +230,8 @@ export default class Popover extends Component {
 
     element.style.transition = [
       transitions.create('opacity', `${transitionDuration}ms`),
-      transitions.create('transform', `${transitionDuration * 0.666}ms`, `${transitionDuration * 0.333}`),
+      transitions.create('transform', `${transitionDuration * 0.666}ms`, `${
+        transitionDuration * 0.333}`),
     ].join(',');
 
     element.style.opacity = 0;

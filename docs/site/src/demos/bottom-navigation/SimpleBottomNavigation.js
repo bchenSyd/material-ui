@@ -1,8 +1,12 @@
 // @flow weak
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from 'material-ui/utils/customPropTypes';
 import { BottomNavigation, BottomNavigationButton } from 'material-ui/BottomNavigation';
+import RestoreIcon from 'material-ui/svg-icons/restore';
+import FavoriteIcon from 'material-ui/svg-icons/favorite';
+import LocationOnIcon from 'material-ui/svg-icons/location-on';
 
 const styleSheet = createStyleSheet('SimpleBottomNavigation', () => ({
   root: {
@@ -32,15 +36,15 @@ export default class SimpleBottomNavigation extends Component {
         >
           <BottomNavigationButton
             label="Recents"
-            icon={<span className="material-icons">restore</span>}
+            icon={<RestoreIcon />}
           />
           <BottomNavigationButton
             label="Favorites"
-            icon={<span className="material-icons">favorite</span>}
+            icon={<FavoriteIcon />}
           />
           <BottomNavigationButton
             label="Nearby"
-            icon={<span className="material-icons">location_on</span>}
+            icon={<LocationOnIcon />}
           />
         </BottomNavigation>
       </div>
@@ -49,5 +53,5 @@ export default class SimpleBottomNavigation extends Component {
 }
 
 SimpleBottomNavigation.contextTypes = {
-  styleManager: PropTypes.object.isRequired,
+  styleManager: customPropTypes.muiRequired,
 };

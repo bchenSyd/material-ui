@@ -1,9 +1,10 @@
 // @flow weak
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from 'material-ui/utils/customPropTypes';
 import { LabelRadio, RadioGroup } from 'material-ui/Radio';
-import { FormLabel } from 'material-ui/Form';
+import { FormLabel, FormControl } from 'material-ui/Form';
 
 const styleSheet = createStyleSheet('RadioButtonsGroup', () => ({
   group: {
@@ -13,7 +14,7 @@ const styleSheet = createStyleSheet('RadioButtonsGroup', () => ({
 
 export default class RadioButtonsGroup extends Component {
   static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
+    styleManager: customPropTypes.muiRequired,
   };
 
   state = {
@@ -28,8 +29,8 @@ export default class RadioButtonsGroup extends Component {
     const classes = this.context.styleManager.render(styleSheet);
 
     return (
-      <div>
-        <FormLabel required>Gender</FormLabel>
+      <FormControl required>
+        <FormLabel>Gender</FormLabel>
         <RadioGroup
           aria-label="Gender"
           name="gender"
@@ -42,7 +43,7 @@ export default class RadioButtonsGroup extends Component {
           <LabelRadio label="Other" value="other" />
           <LabelRadio label="Disabled" value="disabled" disabled />
         </RadioGroup>
-      </div>
+      </FormControl>
     );
   }
 }

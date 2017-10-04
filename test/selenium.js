@@ -4,6 +4,7 @@ const childProcess = require('child_process');
 const ngrok = require('ngrok');
 const webpack = require('webpack');
 const httpServer = require('http-server');
+const writeFile = require('./utils/writeFile');
 
 function runSeleniumTests(options) {
   const {
@@ -23,7 +24,7 @@ function runSeleniumTests(options) {
         throw err;
       } else {
         process.env.SELENIUM_LAUNCH_URL = url;
-        console.log(`Connected to ${url}. Now testing...`);
+        console.log(`Connected to ${url} (proxy to http://locahost:8080)`);
         cb();
       }
     });
@@ -59,7 +60,7 @@ function runSeleniumTests(options) {
     console.log('Booting HTTP server');
 
     server.listen(8080, () => {
-      console.log('Server listening on port 8080');
+      console.log('Server listening on port 8080\n--------------------------');
 
       childProcess.exec('git rev-parse --short HEAD', (err, stdout) => {
         process.env.MUI_HASH = stdout;
@@ -77,7 +78,7 @@ function runSeleniumTests(options) {
   }
 
   function buildSite() {
-    console.log('Building webpack bundle');
+    writeFile('webpack.config.json', webpackConfig);
 
     compiler.run((err) => {
       if (err) {

@@ -9,43 +9,53 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import withWidth, { isWidthUp } from 'material-ui/utils/withWidth';
+import MenuIcon from 'material-ui/svg-icons/menu';
+import LightbulbOutlineIcon from 'material-ui/svg-icons/lightbulb-outline';
+import customPropTypes from 'material-ui/utils/customPropTypes';
 import AppDrawer from './AppDrawer';
 
-const globalStyleSheet = createStyleSheet('global', (theme) => ({
-  '@global': {
-    html: {
-      boxSizing: 'border-box',
-    },
-    '*, *:before, *:after': {
-      boxSizing: 'inherit',
-    },
-    body: {
-      margin: 0,
-      background: theme.palette.background.default,
-      fontFamily: theme.typography.fontFamily,
-      color: theme.palette.text.primary,
-      lineHeight: '1.2',
-      overflowX: 'hidden',
-      WebkitFontSmoothing: 'antialiased', // Antialiasing.
-      MozOsxFontSmoothing: 'grayscale', // Antialiasing.
-    },
-    a: {
-      color: theme.palette.accent.A400,
-      textDecoration: 'none',
-    },
-    'a:hover': {
-      textDecoration: 'underline',
-    },
-    img: {
-      maxWidth: '100%',
-      height: 'auto',
-      width: 'auto',
-    },
-  },
-}));
+function getTitle(routes) {
+  for (let i = routes.length - 1; i >= 0; i -= 1) {
+    if (routes[i].hasOwnProperty('title')) {
+      return routes[i].title;
+    }
+  }
+
+  return null;
+}
 
 const styleSheet = createStyleSheet('AppFrame', (theme) => {
   return {
+    '@global': {
+      html: {
+        boxSizing: 'border-box',
+      },
+      '*, *:before, *:after': {
+        boxSizing: 'inherit',
+      },
+      body: {
+        margin: 0,
+        background: theme.palette.background.default,
+        fontFamily: theme.typography.fontFamily,
+        color: theme.palette.text.primary,
+        lineHeight: '1.2',
+        overflowX: 'hidden',
+        WebkitFontSmoothing: 'antialiased', // Antialiasing.
+        MozOsxFontSmoothing: 'grayscale', // Antialiasing.
+      },
+      a: {
+        color: theme.palette.accent.A400,
+        textDecoration: 'none',
+      },
+      'a:hover': {
+        textDecoration: 'underline',
+      },
+      img: {
+        maxWidth: '100%',
+        height: 'auto',
+        width: 'auto',
+      },
+    },
     appFrame: {
       display: 'flex',
       alignItems: 'stretch',
@@ -97,19 +107,11 @@ class AppFrame extends Component {
   };
 
   static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
+    styleManager: customPropTypes.muiRequired,
   };
 
   state = {
     drawerOpen: false,
-  };
-
-  componentWillMount() {
-    this.context.styleManager.render(globalStyleSheet);
-  }
-
-  handleDrawerOpen = () => {
-    this.setState({ drawerOpen: true });
   };
 
   handleDrawerClose = () => {
@@ -124,31 +126,17 @@ class AppFrame extends Component {
     this.props.dispatch({ type: 'TOGGLE_THEME_SHADE' });
   };
 
-  getTitle() {
-    const { routes } = this.props;
-    for (let i = routes.length - 1; i >= 0; i -= 1) {
-      if (routes[i].hasOwnProperty('title')) {
-        return routes[i].title;
-      }
-    }
-    return null;
-  }
-
-  getCurrentPath() {
-    const { routes } = this.props;
-    for (let i = routes.length - 1; i >= 0; i -= 1) {
-      if (routes[i].hasOwnProperty('path')) {
-        return routes[i].path;
-      }
-    }
-    return null;
-  }
-
   render() {
-    const classes = this.context.styleManager.render(styleSheet);
-    const title = this.getTitle();
+    const {
+      children,
+      routes,
+      width,
+    } = this.props;
 
-    let drawerDocked = isWidthUp('lg', this.props.width);
+    const classes = this.context.styleManager.render(styleSheet);
+    const title = getTitle(routes);
+
+    let drawerDocked = isWidthUp('lg', width);
     let navIconClassName = classes.navIcon;
     let appBarClassName = classes.appBar;
 
@@ -165,25 +153,27 @@ class AppFrame extends Component {
         <AppBar className={appBarClassName}>
           <Toolbar>
             <IconButton contrast onClick={this.handleDrawerToggle} className={navIconClassName}>
-              menu
+              <MenuIcon />
             </IconButton>
-            <Text className={classes.title} type="title" colorInherit>
-              {title}
-            </Text>
+            {title !== null && (
+              <Text className={classes.title} type="title" colorInherit>
+                {title}
+              </Text>
+            )}
             <div className={classes.grow} />
             <IconButton contrast onClick={this.handleToggleShade} className={classes.toggleShade}>
-              lightbulb_outline
+              <LightbulbOutlineIcon />
             </IconButton>
           </Toolbar>
         </AppBar>
         <AppDrawer
           className={classes.drawer}
           docked={drawerDocked}
-          routes={this.props.routes}
+          routes={routes}
           onRequestClose={this.handleDrawerClose}
           open={this.state.drawerOpen}
         />
-        {this.props.children}
+        {children}
       </div>
     );
   }

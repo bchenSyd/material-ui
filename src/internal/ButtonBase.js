@@ -2,9 +2,10 @@
 
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
-import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
+import { createStyleSheet } from 'jss-theme-reactor';
 import keycode from 'keycode';
+import customPropTypes from '../utils/customPropTypes';
 import { listenForFocusKeys, detectKeyboardFocus, focusKeyPressed } from '../utils/keyboardFocus';
 import { TouchRipple, createRippleHandler } from '../Ripple';
 
@@ -29,11 +30,17 @@ export const styleSheet = createStyleSheet('ButtonBase', () => {
 export default class ButtonBase extends Component {
   static propTypes = {
     centerRipple: PropTypes.bool,
+    /**
+     * The content of the component.
+     */
     children: PropTypes.node,
     /**
      * The CSS class name of the root element.
      */
     className: PropTypes.string,
+    /**
+     * The element or component used for the root node.
+     */
     component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     /**
      * If `true`, the base button will be disabled.
@@ -75,7 +82,7 @@ export default class ButtonBase extends Component {
   };
 
   static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
+    styleManager: customPropTypes.muiRequired,
   };
 
   state = {

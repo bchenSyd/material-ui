@@ -6,6 +6,7 @@ import jssPreset from 'jss-preset-default';
 import { createMuiTheme } from './theme';
 
 export const MUI_SHEET_ORDER = [
+  'Layout',
   'Collapse',
   'Fade',
   'Slide',
@@ -129,7 +130,11 @@ export default class MuiThemeProvider extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    if (this.theme && nextProps.theme && nextProps.theme !== this.theme) {
+    if (this.styleManager !== nextProps.styleManager) {
+      const { theme, styleManager } = MuiThemeProvider.createDefaultContext(nextProps);
+      this.theme = theme;
+      this.styleManager = styleManager;
+    } else if (this.theme && nextProps.theme && nextProps.theme !== this.theme) {
       this.theme = nextProps.theme;
       this.styleManager.updateTheme(this.theme);
     }

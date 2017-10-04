@@ -3,8 +3,10 @@
 import React, { Component, PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
 import shallowEqual from 'recompose/shallowEqual';
+import customPropTypes from 'material-ui/utils/customPropTypes';
 import IconButton from 'material-ui/IconButton';
 import Collapse from 'material-ui/transitions/Collapse';
+import CodeIcon from 'material-ui/svg-icons/code';
 import MarkdownElement from 'docs/site/src/components/MarkdownElement';
 
 const requireDemos = require.context('docs/site/src', true, /\.js$/);
@@ -43,13 +45,13 @@ const styleSheet = createStyleSheet('Demo', (theme) => {
         borderRadius: '0px !important',
       },
     },
-    codeContainer: {
-      color: palette.text.primary,
-      backgroundColor: palette.background.paper,
-    },
     [theme.breakpoints.up(600)]: {
-      codeButton: { display: 'block' },
-      code: { display: 'block' },
+      codeButton: {
+        display: 'block',
+      },
+      code: {
+        display: 'block',
+      },
       root: {
         marginLeft: 0,
         marginRight: 0,
@@ -64,8 +66,8 @@ export default class Demo extends Component {
   };
 
   static contextTypes = {
-    theme: PropTypes.object.isRequired,
-    styleManager: PropTypes.object.isRequired,
+    theme: customPropTypes.muiRequired,
+    styleManager: customPropTypes.muiRequired,
   };
 
   state = {
@@ -80,10 +82,11 @@ export default class Demo extends Component {
     );
   }
 
-  handleCodeButtonClick = () =>
+  handleCodeButtonClick = () => {
     this.setState({
       codeOpen: !this.state.codeOpen,
     });
+  }
 
   render() {
     const DemoComponent = requireDemos(`./${this.props.demo}`).default;
@@ -97,7 +100,7 @@ export default class Demo extends Component {
           onClick={this.handleCodeButtonClick}
           className={classes.codeButton}
         >
-          code
+          <CodeIcon />
         </IconButton>
         <Collapse in={this.state.codeOpen}>
           <MarkdownElement className={classes.code} text={code} />

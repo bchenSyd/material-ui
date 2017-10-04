@@ -1,7 +1,8 @@
 // @flow weak
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from 'material-ui/utils/customPropTypes';
 import Avatar from 'material-ui/Avatar';
 import { deepOrange, deepPurple } from 'material-ui/styles/colors';
 
@@ -29,22 +30,13 @@ export default function LetterAvatars(props, context) {
   const classes = context.styleManager.render(styleSheet);
   return (
     <div className={classes.row}>
-      <Avatar
-        icon="H"
-        className={classes.avatar}
-      />
-      <Avatar
-        icon="N"
-        className={classes.orangeAvatar}
-      />
-      <Avatar
-        icon="O"
-        className={classes.purpleAvatar}
-      />
+      <Avatar className={classes.avatar}>H</Avatar>
+      <Avatar className={classes.orangeAvatar}>N</Avatar>
+      <Avatar className={classes.purpleAvatar}>OP</Avatar>
     </div>
   );
 }
 
 LetterAvatars.contextTypes = {
-  styleManager: PropTypes.object.isRequired,
+  styleManager: customPropTypes.muiRequired,
 };

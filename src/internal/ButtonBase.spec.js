@@ -52,8 +52,10 @@ describe('<ButtonBase />', () => {
       const wrapper = shallow(
         <ButtonBase className="test-class-name" />,
       );
-      assert.strictEqual(wrapper.hasClass('test-class-name'), true, 'should pass the test className');
-      assert.strictEqual(wrapper.hasClass(classes.buttonBase), true, 'should have the buttonBase class');
+      assert.strictEqual(wrapper.hasClass('test-class-name'), true,
+        'should pass the test className');
+      assert.strictEqual(wrapper.hasClass(classes.buttonBase), true,
+        'should have the buttonBase class');
     });
 
     it('should change the button type to span and set role="button"', () => {
@@ -237,7 +239,7 @@ describe('<ButtonBase />', () => {
       );
     });
 
-    it('should stop pulsate and start a ripple when the space (activation) button is pressed', () => {
+    it('should stop pulsate and start a ripple when the space button is pressed', () => {
       wrapper.instance().ripple = { stop: spy((event, cb) => cb()), start: spy() };
       wrapper.simulate('keyDown', { which: 32, keyCode: 32, key: ' ', persist: () => {} });
 
@@ -291,6 +293,9 @@ describe('<ButtonBase />', () => {
       );
 
       const button = document.getElementById('test-button');
+      if (!button) {
+        throw new Error('missing button');
+      }
       button.focus();
 
       const event = new window.Event('keyup');

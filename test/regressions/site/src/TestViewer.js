@@ -2,6 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from 'material-ui/utils/customPropTypes';
 
 const globalStyleSheet = createStyleSheet('global', (theme) => {
   const { palette, typography } = theme;
@@ -26,7 +27,7 @@ const globalStyleSheet = createStyleSheet('global', (theme) => {
         color: palette.accent.A400,
         textDecoration: 'none',
       },
-      '@:hover': {
+      'a:hover': {
         textDecoration: 'underline',
       },
       p: {
@@ -36,8 +37,7 @@ const globalStyleSheet = createStyleSheet('global', (theme) => {
   };
 });
 
-const styleSheet = createStyleSheet('TestViewer', (theme) => {
-  const { palette } = theme;
+const styleSheet = createStyleSheet('TestViewer', () => {
   return {
     root: {
       display: 'flex',
@@ -45,14 +45,6 @@ const styleSheet = createStyleSheet('TestViewer', (theme) => {
       height: '100vh',
       alignItems: 'center',
       justifyContent: 'center',
-    },
-    info: {
-      position: 'absolute',
-      top: 20,
-      right: 20,
-      fontSize: 12,
-      fontWeight: 500,
-      color: palette.error[500],
     },
   };
 });
@@ -65,7 +57,7 @@ export default class TestViewer extends Component {
   };
 
   static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
+    styleManager: customPropTypes.muiRequired,
   };
 
   componentWillMount() {

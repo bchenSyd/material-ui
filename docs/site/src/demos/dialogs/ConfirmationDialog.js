@@ -3,6 +3,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from 'material-ui/utils/customPropTypes';
 import Button from 'material-ui/Button';
 import { List, ListItem, ListItemText } from 'material-ui/List';
 import {
@@ -86,11 +87,11 @@ class ConfirmationDialog extends Component {
             selectedValue={this.state.selectedValue}
             onChange={this.handleChange}
           >
-            {options.map((n, index) => (
+            {options.map((option) => (
               <Radio
-                label={n}
-                value={n}
-                key={index}
+                label={option}
+                value={option}
+                key={option}
               />
             ))}
           </RadioGroup>
@@ -118,7 +119,7 @@ const styleSheet = createStyleSheet('ConfirmationDialogDemo', (theme) => ({
 
 export default class ConfirmationDialogDemo extends Component {
   static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
+    styleManager: customPropTypes.muiRequired,
   };
 
   state = {

@@ -29,6 +29,12 @@ describe('<ListItemText />', () => {
     assert.strictEqual(wrapper.hasClass(classes.root), true, 'should have the root class');
   });
 
+  it('should render with inset class', () => {
+    const wrapper = shallow(<ListItemText inset />);
+    assert.strictEqual(wrapper.hasClass(classes.inset), true, 'should have the inset class');
+    assert.strictEqual(wrapper.hasClass(classes.root), true, 'should have the root class');
+  });
+
   it('should render with no children', () => {
     const wrapper = shallow(<ListItemText />);
     assert.strictEqual(wrapper.children().length, 0, 'should have no children');
@@ -41,7 +47,8 @@ describe('<ListItemText />', () => {
       );
       assert.strictEqual(wrapper.children().length, 1, 'should have 1 child');
       assert.strictEqual(wrapper.childAt(0).is('Text'), true, 'should render Text');
-      assert.strictEqual(wrapper.childAt(0).prop('type'), 'subheading', 'should have the subheading type');
+      assert.strictEqual(wrapper.childAt(0).prop('type'),
+        'subheading', 'should have the subheading type');
       assert.strictEqual(
         wrapper.childAt(0).children().equals('This is the primary text'),
         true,
@@ -68,7 +75,8 @@ describe('<ListItemText />', () => {
       assert.strictEqual(wrapper.children().length, 1, 'should have 1 child');
       assert.strictEqual(wrapper.childAt(0).is('Text'), true, 'should render Text');
       assert.strictEqual(wrapper.childAt(0).props().type, 'body1', 'should have the body1 type');
-      assert.strictEqual(wrapper.childAt(0).props().secondary, true, 'should have the secondary property');
+      assert.strictEqual(wrapper.childAt(0).props().secondary, true,
+        'should have the secondary property');
       assert.strictEqual(
         wrapper.childAt(0).children().equals('This is the secondary text'),
         true,
@@ -96,7 +104,8 @@ describe('<ListItemText />', () => {
     assert.strictEqual(wrapper.children().length, 2, 'should have 2 children');
 
     assert.strictEqual(wrapper.childAt(0).is('Text'), true, 'should render Text');
-    assert.strictEqual(wrapper.childAt(0).props().type, 'subheading', 'should have the subheading type');
+    assert.strictEqual(wrapper.childAt(0).props().type, 'subheading',
+      'should have the subheading type');
     assert.strictEqual(
       wrapper.childAt(0).children().equals('This is the primary text'),
       true,
@@ -105,7 +114,8 @@ describe('<ListItemText />', () => {
 
     assert.strictEqual(wrapper.childAt(1).is('Text'), true, 'should render Text');
     assert.strictEqual(wrapper.childAt(1).props().type, 'body1', 'should have the body1 type');
-    assert.strictEqual(wrapper.childAt(1).props().secondary, true, 'should have the secondary property');
+    assert.strictEqual(wrapper.childAt(1).props().secondary, true,
+      'should have the secondary property');
     assert.strictEqual(
       wrapper.childAt(1).children().equals('This is the secondary text'),
       true,

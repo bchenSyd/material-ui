@@ -1,18 +1,20 @@
 // @flow weak
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from 'material-ui/utils/customPropTypes';
 import {
   List,
   ListItem,
   ListItemText,
 } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
+import FolderIcon from 'material-ui/svg-icons/folder';
 
 const styleSheet = createStyleSheet('FolderList', (theme) => ({
   root: {
     width: '100%',
-    maxWidth: '360px',
+    maxWidth: 360,
     background: theme.palette.background.paper,
   },
 }));
@@ -23,11 +25,11 @@ function FolderList(props, context) {
     <div className={classes.root}>
       <List>
         <ListItem button>
-          <Avatar icon={<span className="material-icons">folder</span>} />
+          <Avatar><FolderIcon /></Avatar>
           <ListItemText primary="Photos" secondary="Jan 9, 2016" />
         </ListItem>
         <ListItem button>
-          <Avatar icon={<span className="material-icons">folder</span>} />
+          <Avatar><FolderIcon /></Avatar>
           <ListItemText primary="Work" secondary="Jan 7, 2016" />
         </ListItem>
       </List>
@@ -36,7 +38,7 @@ function FolderList(props, context) {
 }
 
 FolderList.contextTypes = {
-  styleManager: PropTypes.object.isRequired,
+  styleManager: customPropTypes.muiRequired,
 };
 
 export default FolderList;

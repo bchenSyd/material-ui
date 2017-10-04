@@ -1,8 +1,13 @@
 // @flow weak
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from 'material-ui/utils/customPropTypes';
 import { BottomNavigation, BottomNavigationButton } from 'material-ui/BottomNavigation';
+import RestoreIcon from 'material-ui/svg-icons/restore';
+import FavoriteIcon from 'material-ui/svg-icons/favorite';
+import LocationOnIcon from 'material-ui/svg-icons/location-on';
+import FolderIcon from 'material-ui/svg-icons/folder';
 
 const styleSheet = createStyleSheet('LabelBottomNavigation', () => ({
   root: {
@@ -32,19 +37,19 @@ export default class LabelBottomNavigation extends Component {
         >
           <BottomNavigationButton
             label="Recents"
-            icon={<span className="material-icons">restore</span>}
+            icon={<RestoreIcon />}
           />
           <BottomNavigationButton
             label="Favorites"
-            icon={<span className="material-icons">favorite</span>}
+            icon={<FavoriteIcon />}
           />
           <BottomNavigationButton
             label="Nearby"
-            icon={<span className="material-icons">location_on</span>}
+            icon={<LocationOnIcon />}
           />
           <BottomNavigationButton
             label="Folder"
-            icon={<span className="material-icons">folder</span>}
+            icon={<FolderIcon />}
           />
         </BottomNavigation>
       </div>
@@ -53,5 +58,5 @@ export default class LabelBottomNavigation extends Component {
 }
 
 LabelBottomNavigation.contextTypes = {
-  styleManager: PropTypes.object.isRequired,
+  styleManager: customPropTypes.muiRequired,
 };

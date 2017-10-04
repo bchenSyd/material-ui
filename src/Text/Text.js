@@ -1,8 +1,9 @@
 // @flow weak
 
 import React, { PropTypes } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
+import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from '../utils/customPropTypes';
 
 export const styleSheet = createStyleSheet('Text', (theme) => {
   return {
@@ -21,7 +22,7 @@ export const styleSheet = createStyleSheet('Text', (theme) => {
     body1: theme.typography.body1,
     caption: theme.typography.caption,
     button: theme.typography.button,
-    center: {
+    'align-center': {
       textAlign: 'center',
     },
     noWrap: {
@@ -30,7 +31,7 @@ export const styleSheet = createStyleSheet('Text', (theme) => {
       whiteSpace: 'nowrap',
     },
     gutterBottom: {
-      marginBottom: '0.25em',
+      marginBottom: '0.35em',
     },
     paragraph: {
       marginBottom: 16,
@@ -65,7 +66,7 @@ export default function Text(props, context) {
     [classes.secondary]: secondary,
     [classes.gutterBottom]: gutterBottom,
     [classes.paragraph]: paragraph,
-    [classes.center]: align === 'center',
+    [classes[`align-${align}`]]: align === 'center',
   }, classNameProp);
 
   const Component = paragraph ? 'p' : componentProp;
@@ -74,7 +75,9 @@ export default function Text(props, context) {
 }
 
 Text.propTypes = {
-  align: PropTypes.string,
+  align: PropTypes.oneOf([
+    'center',
+  ]),
   children: PropTypes.node,
   /**
    * The CSS class name of the root element.
@@ -112,5 +115,5 @@ Text.defaultProps = {
 };
 
 Text.contextTypes = {
-  styleManager: PropTypes.object.isRequired,
+  styleManager: customPropTypes.muiRequired,
 };

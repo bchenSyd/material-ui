@@ -1,8 +1,11 @@
 // @flow weak
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from 'material-ui/utils/customPropTypes';
 import Button from 'material-ui/Button';
+import AddIcon from 'material-ui/svg-icons/add';
+import ModeEditIcon from 'material-ui/svg-icons/mode-edit';
 
 const styleSheet = createStyleSheet('FloatingActionButtons', () => ({
   button: {
@@ -15,16 +18,15 @@ export default function FloatingActionButtons(props, context) {
   return (
     <div>
       <Button fab primary className={classes.button}>
-        <span className="material-icons">add</span>
+        <AddIcon />
       </Button>
       <Button fab accent className={classes.button}>
-        <span className="material-icons">mode_edit</span>
+        <ModeEditIcon />
       </Button>
     </div>
   );
 }
 
 FloatingActionButtons.contextTypes = {
-  styleManager: PropTypes.object.isRequired,
+  styleManager: customPropTypes.muiRequired,
 };
-

@@ -1,8 +1,9 @@
 // @flow weak
 
 import React, { PropTypes } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
+import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from '../utils/customPropTypes';
 
 export const styleSheet = createStyleSheet('DialogContentText', (theme) => {
   return {
@@ -30,6 +31,9 @@ export default function DialogContentText(props, context) {
 }
 
 DialogContentText.propTypes = {
+  /**
+   * The content of the component.
+   */
   children: PropTypes.node,
   /**
    * The CSS class name of the root element.
@@ -38,5 +42,5 @@ DialogContentText.propTypes = {
 };
 
 DialogContentText.contextTypes = {
-  styleManager: PropTypes.object.isRequired,
+  styleManager: customPropTypes.muiRequired,
 };

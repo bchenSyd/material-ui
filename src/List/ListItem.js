@@ -1,20 +1,23 @@
 // @flow weak
 
 import React, { Component, PropTypes } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
+import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from '../utils/customPropTypes';
 import ButtonBase from '../internal/ButtonBase';
 
 export const styleSheet = createStyleSheet('ListItem', (theme) => {
   return {
     listItem: {
       display: 'flex',
+      flex: '1 1 auto',  // grow primary portion so that secondary is right-aligned
       alignItems: 'center',
       position: 'relative',
       textDecoration: 'none',
     },
     listItemContainer: {
-      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
     },
     keyboardFocused: {
       background: theme.palette.text.divider,
@@ -68,7 +71,7 @@ export default class ListItem extends Component {
   };
 
   static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
+    styleManager: customPropTypes.muiRequired,
   };
 
   render() {

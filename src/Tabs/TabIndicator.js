@@ -1,8 +1,9 @@
 // @flow weak
 
 import React, { PropTypes } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
+import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from '../utils/customPropTypes';
 
 export const styleSheet = createStyleSheet('TabIndicator', (theme) => {
   return {
@@ -36,9 +37,7 @@ export default function TabIndicator(props, context) {
     backgroundColor: indicatorColor,
   } : styleProp;
 
-  return (
-    <div className={className} style={style} />
-  );
+  return <div className={className} style={style} />;
 }
 
 TabIndicator.propTypes = {
@@ -60,5 +59,5 @@ TabIndicator.propTypes = {
 };
 
 TabIndicator.contextTypes = {
-  styleManager: PropTypes.object.isRequired,
+  styleManager: customPropTypes.muiRequired,
 };

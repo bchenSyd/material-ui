@@ -1,8 +1,9 @@
 // @flow weak
 
 import React, { PropTypes } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
+import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from '../utils/customPropTypes';
 
 export const styleSheet = createStyleSheet('DialogContent', () => {
   const gutter = 24;
@@ -35,6 +36,9 @@ export default function DialogContent(props, context) {
 }
 
 DialogContent.propTypes = {
+  /**
+   * The content of the component.
+   */
   children: PropTypes.node,
   /**
    * The CSS class name of the root element.
@@ -43,5 +47,5 @@ DialogContent.propTypes = {
 };
 
 DialogContent.contextTypes = {
-  styleManager: PropTypes.object.isRequired,
+  styleManager: customPropTypes.muiRequired,
 };

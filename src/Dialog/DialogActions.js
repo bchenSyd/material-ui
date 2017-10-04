@@ -1,8 +1,9 @@
 // @flow weak
 
 import React, { Component, PropTypes } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
+import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from '../utils/customPropTypes';
 
 export const styleSheet = createStyleSheet('DialogActions', () => {
   return {
@@ -24,6 +25,9 @@ export const styleSheet = createStyleSheet('DialogActions', () => {
 
 export default class DialogActions extends Component {
   static propTypes = {
+    /**
+     * The content of the component.
+     */
     children: PropTypes.node,
     /**
      * The CSS class name of the root element.
@@ -32,7 +36,7 @@ export default class DialogActions extends Component {
   };
 
   static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
+    styleManager: customPropTypes.muiRequired,
   };
 
   classes = {};
@@ -56,7 +60,11 @@ export default class DialogActions extends Component {
     this.classes = this.context.styleManager.render(styleSheet);
 
     return (
-      <div data-mui-test="DialogActions" className={classNames(this.classes.root, className)} {...other}>
+      <div
+        data-mui-test="DialogActions"
+        className={classNames(this.classes.root, className)}
+        {...other}
+      >
         {React.Children.map(children, this.renderButton)}
       </div>
     );

@@ -1,8 +1,9 @@
 // @flow weak
 
 import React, { Component, PropTypes } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
+import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from '../utils/customPropTypes';
 import { easing } from '../styles/transitions';
 
 const THICKNESS = 3.6;
@@ -40,11 +41,13 @@ export const styleSheet = createStyleSheet('CircularProgress', (theme) => {
         strokeDashoffset: 0,
       },
       '50%, 58%': {
-        strokeDasharray: `calc((65% - ${THICKNESS}px) * ${PI}), calc((100% - ${THICKNESS}px) * ${PI})`,
+        strokeDasharray: `calc((65% - ${THICKNESS}px) * ${PI}), calc((100% - ${
+          THICKNESS}px) * ${PI})`,
         strokeDashoffset: `calc((25% - ${THICKNESS}px) * -${PI})`,
       },
       '100%': {
-        strokeDasharray: `calc((65% - ${THICKNESS}px) * ${PI}), calc((100% - ${THICKNESS}px) * ${PI})`,
+        strokeDasharray: `calc((65% - ${THICKNESS}px) * ${PI}), calc((100% - ${
+          THICKNESS}px) * ${PI})`,
         strokeDashoffset: `calc((99% - ${THICKNESS}px) * -${PI})`,
       },
     },
@@ -78,7 +81,7 @@ export default class CircularProgress extends Component {
   };
 
   static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
+    styleManager: customPropTypes.muiRequired,
   };
 
   render() {

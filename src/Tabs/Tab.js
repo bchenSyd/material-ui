@@ -1,9 +1,10 @@
 // @flow weak
 
-import React, { Component, PropTypes, cloneElement, isValidElement } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
+import React, { Component, PropTypes, isValidElement } from 'react';
 import classNames from 'classnames';
+import { createStyleSheet } from 'jss-theme-reactor';
 import ButtonBase from '../internal/ButtonBase';
+import customPropTypes from '../utils/customPropTypes';
 
 export const styleSheet = createStyleSheet('Tab', (theme) => {
   return {
@@ -49,9 +50,6 @@ export const styleSheet = createStyleSheet('Tab', (theme) => {
         paddingRight: 24,
         fontSize: theme.typography.fontSize - 1,
       },
-    },
-    icon: {
-      display: 'block',
     },
   };
 });
@@ -107,7 +105,7 @@ export default class Tab extends Component {
   };
 
   static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
+    styleManager: customPropTypes.muiRequired,
   };
 
   handleChange = (event) => {
@@ -139,10 +137,8 @@ export default class Tab extends Component {
     let icon;
 
     if (iconProp !== undefined) {
-      const iconClassName = classNames(classes.icon,
-        isValidElement(iconProp) ? iconProp.props.className : null);
       icon = isValidElement(iconProp) ?
-        cloneElement(iconProp, { className: iconClassName }) :
+        iconProp :
         <span className="material-icons">{iconProp}</span>;
     }
 

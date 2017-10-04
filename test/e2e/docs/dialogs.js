@@ -1,3 +1,4 @@
+
 module.exports = {
   '@tags': ['Dialog', 'Modal', 'Backdrop'],
   'Alert Dialog': function AlertDialog(browser) {
@@ -5,9 +6,12 @@ module.exports = {
       .maximizeWindow()
       .url(`${browser.launch_url}/#/component-demos/dialogs`)
       .waitForElementVisible('[data-reactroot]', 6000)
-      .assert.visible('[data-mui-demo="dialogs/Alerts.js"]')
+      // selenium css selectors, see https://saucelabs.com/resources/articles/selenium-tips-css-selectors
+      .assert.visible('a[class*="Button-root"]') // *= Match a substring 
+      .assert.visible('a[href$="installation"]') // $= Match a suffix
+      .assert.visible('a[class^="Home-button"]') // ^= Match a prefix
       .assert.elementNotPresent('[data-mui-test="Modal"]')
-      .click('[data-mui-demo="dialogs/Alerts.js"] button')
+      .assert.visible('a[class*=Home-button]')
       .waitForElementVisible('[data-mui-test="Modal"]', 1000)
       .pause(500)
       .assert.elementPresent('[data-mui-test="Dialog"]')

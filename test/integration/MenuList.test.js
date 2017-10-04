@@ -16,7 +16,8 @@ function assertMenuItemTabIndexed(wrapper, tabIndexed) {
     if (index === tabIndexed) {
       assert.strictEqual(item.prop('tabIndex'), '0', 'should have the tab index');
     } else {
-      assert.strictEqual(item.prop('tabIndex'), '-1', `item at index ${index} should not be tab focusable`);
+      assert.strictEqual(item.prop('tabIndex'), '-1',
+        `item at index ${index} should not be tab focusable`);
     }
   });
 }
@@ -77,6 +78,11 @@ describe('<MenuList> integration', () => {
       wrapper.setProps({
         onBlur: handleBlur,
       });
+
+      if (!document.activeElement) {
+        throw new Error('missing active element');
+      }
+
       document.activeElement.blur();
       setTimeout(() => {
         assert.strictEqual(handleBlur.callCount, 1);

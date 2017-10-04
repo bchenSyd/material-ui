@@ -20,14 +20,17 @@ describe('<CardActions />', () => {
       <CardActions />,
     );
     assert.strictEqual(wrapper.is('div'), true, 'should be a div');
-    assert.strictEqual(wrapper.hasClass(classes.cardActions), true, 'should have the cardActions class');
+    assert.strictEqual(wrapper.hasClass(classes.cardActions), true,
+      'should have the cardActions class');
   });
 
   it('should pass the actionSpacing class to children', () => {
+    const child3 = false;
     const wrapper = shallow(
       <CardActions>
         <div id="child1" />
         <div id="child2" />
+        {child3 && <div id="child3" />}
       </CardActions>,
     );
 

@@ -2,6 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import Transition from '../internal/Transition';
+import customPropTypes from '../utils/customPropTypes';
 
 function getTranslateValue(props, element) {
   const { direction } = props;
@@ -68,7 +69,7 @@ export default class Slide extends Component {
   };
 
   static contextTypes = {
-    theme: PropTypes.object.isRequired,
+    theme: customPropTypes.muiRequired,
   };
 
   handleEnter = (element) => {
@@ -80,7 +81,8 @@ export default class Slide extends Component {
 
   handleEntering = (element) => {
     const { transitions } = this.context.theme;
-    element.style.transition = transitions.create('transform', `${this.props.transitionDuration}ms`);
+    element.style.transition = transitions.create('transform',
+      `${this.props.transitionDuration}ms`);
     element.style.transform = 'translate3d(0, 0, 0)';
     if (this.props.onEntering) {
       this.props.onEntering(element);

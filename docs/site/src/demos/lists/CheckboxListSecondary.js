@@ -1,7 +1,8 @@
 // @flow weak
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from 'material-ui/utils/customPropTypes';
 import {
   List,
   ListItem,
@@ -11,17 +12,17 @@ import {
 import Checkbox from 'material-ui/Checkbox';
 import Avatar from 'material-ui/Avatar';
 
-const styleSheet = createStyleSheet('CheckboxList', (theme) => ({
+const styleSheet = createStyleSheet('CheckboxListSecondary', (theme) => ({
   root: {
     width: '100%',
-    maxWidth: '360px',
+    maxWidth: 360,
     background: theme.palette.background.paper,
   },
 }));
 
-export default class CheckboxList extends Component {
+export default class CheckboxListSecondary extends Component {
   static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
+    styleManager: customPropTypes.muiRequired,
   };
 
   state = {
@@ -50,7 +51,7 @@ export default class CheckboxList extends Component {
     return (
       <div className={classes.root}>
         <List>
-          {Array.from({ length: 4 }, (v, k) => k).map((n, index) => (
+          {Array.from({ length: 4 }, (v, k) => k).map((index) => (
             <ListItem dense button key={index}>
               <Avatar
                 alt="Remy Sharp"

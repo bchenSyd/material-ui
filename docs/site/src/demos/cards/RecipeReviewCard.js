@@ -1,8 +1,9 @@
 // @flow weak
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
 import classnames from 'classnames';
+import customPropTypes from 'material-ui/utils/customPropTypes';
 import {
   Card,
   CardHeader,
@@ -32,7 +33,7 @@ const styleSheet = createStyleSheet('RecipeReviewCard', (theme) => ({
 
 export default class RecipeReviewCard extends Component {
   static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
+    styleManager: customPropTypes.muiRequired,
   };
 
   state = { expanded: false };
@@ -46,7 +47,7 @@ export default class RecipeReviewCard extends Component {
       <div>
         <Card className={classes.card}>
           <CardHeader
-            avatar={<Avatar icon="R" aria-label="Recipe" className={classes.avatar} />}
+            avatar={<Avatar aria-label="Recipe" className={classes.avatar}>R</Avatar>}
             title="Shrimp and Chorizo Paella"
             subhead="September 14, 2016"
           />

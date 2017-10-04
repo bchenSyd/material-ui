@@ -2,17 +2,17 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const chalk = require('chalk');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+
 
 module.exports = {
   debug: true,
+  bail: true,
   devtool: 'inline-source-map',
   context: path.resolve(__dirname),
   entry: {
-    main: [
-      'eventsource-polyfill', // hot reloading in IE
-      'react-hot-loader/patch',
-      'webpack-dev-server/client?http://0.0.0.0:3000',
-      'webpack/hot/only-dev-server',
+    main: [      
       './src/index',
     ],
   },
@@ -26,23 +26,23 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['babel'],
+        loaders: ['babel-loader'],
       },
       {
         test: /\.svg$/,
-        loader: 'file',
+        loader: 'file-loader',
       },
       {
         test: /\.(jpg|gif|png)$/,
-        loader: 'file!img',
+        loader: 'file-loader!img-loader',
       },
       {
         test: /\.md$/,
-        loader: 'raw',
+        loader: 'raw-loader',
       },
       {
         test: /\.css$/,
-        loader: 'style!css',
+        loader: 'style-loader!css-loader',
       },
     ],
   },
@@ -55,5 +55,9 @@ module.exports = {
   progress: true,
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new ProgressBarPlugin({
+      format: ' building [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
+      clear: false
+    }),
   ],
 };

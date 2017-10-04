@@ -1,8 +1,9 @@
 // @flow weak
 
 import React, { PropTypes } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
+import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from '../utils/customPropTypes';
 
 export const styleSheet = createStyleSheet('FormGroup', () => {
   return {
@@ -17,8 +18,9 @@ export const styleSheet = createStyleSheet('FormGroup', () => {
 });
 
 /**
- * FormGroup wraps controls such as Checkbox and Switch.  It provides compact row layout and FormLabel
- * awareness.  Upon focusing on one of the child controls, it will propagate `focused` to the label.
+ * FormGroup wraps controls such as Checkbox and Switch.
+ * It provides compact row layout and FormLabel awareness.
+ * Upon focusing on one of the child controls, it will propagate `focused` to the label.
  */
 export default function FormGroup(props, context) {
   const { className, children, row, ...other } = props;
@@ -35,6 +37,9 @@ export default function FormGroup(props, context) {
 }
 
 FormGroup.propTypes = {
+  /**
+   * The content of the component.
+   */
   children: PropTypes.node,
   /**
    * The CSS class name of the root element.
@@ -51,5 +56,5 @@ FormGroup.defaultProps = {
 };
 
 FormGroup.contextTypes = {
-  styleManager: PropTypes.object.isRequired,
+  styleManager: customPropTypes.muiRequired,
 };

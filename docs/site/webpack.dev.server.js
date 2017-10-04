@@ -3,21 +3,22 @@
 
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
-const webpackConfig = require('./webpack.dev.config');
+const webpackConfig = require('./webpack.prod.config');
 
 const serverOptions = {
   publicPath: webpackConfig.output.publicPath,
   hot: true,
   historyApiFallback: true,
   stats: {
+    // Remove built modules information.
     modules: false,
-    chunks: false,
+    // Remove built modules information to chunk information.
     chunkModules: false,
     colors: true,
   },
 };
 
-const PORT = 3000;
+const PORT = 8080;
 
 new WebpackDevServer(webpack(webpackConfig), serverOptions)
   .listen(PORT, '0.0.0.0', (err) => {
