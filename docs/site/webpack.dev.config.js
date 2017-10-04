@@ -2,9 +2,13 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const chalk = require('chalk');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+
 
 module.exports = {
   debug: true,
+  bail: true,
   devtool: 'inline-source-map',
   context: path.resolve(__dirname),
   entry: {
@@ -50,6 +54,10 @@ module.exports = {
   },
   progress: true,
   plugins: [
-   
+    new webpack.HotModuleReplacementPlugin(),
+    new ProgressBarPlugin({
+      format: ' building [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
+      clear: false
+    }),
   ],
 };
