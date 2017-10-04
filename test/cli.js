@@ -58,10 +58,10 @@ program
   .command('e2e')
   .description('Run the e2e selenium tests')
   .option('-l, --local', 'Use nightwatch.local.conf.js')
-  .option('-e, --environment', 'Comma separated string of browser test environment names')
+  .option('-e, --environment [dummy]', 'Comma separated string of browser test environment names')
   .action((command) => {
-    const { local, browsers } = command;
-    return runE2ETests({ local, browsers });
+    const { local, environment } = command;
+    return runE2ETests({ local, environment });
   });
 
 program

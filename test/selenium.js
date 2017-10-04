@@ -32,7 +32,7 @@ function runSeleniumTests(options) {
 
   function execTests() {
     const child = childProcess.spawn(
-      './node_modules/.bin/nightwatch',
+      '.\\node_modules\\.bin\\nightwatch.cmd',
       [
         '-c',
         local ? 'test/nightwatch.local.conf.js' : 'test/nightwatch.conf.js',
@@ -41,7 +41,7 @@ function runSeleniumTests(options) {
         tests,
       ],
       {
-        stdio: [0, 0, 0],
+        stdio: [0, 1, 2], //calling-process.stdin: 0, calling-process.stdout:1, calling-process.err:2
       },
     );
 
