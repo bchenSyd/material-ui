@@ -16,8 +16,8 @@ module.exports = {
       silent: true,
       desiredCapabilities: {
         build: `Material-UI ${process.env.MUI_HASH}`,
-        'browserstack.user': process.env.BROWSERSTACK_USERNAME,
-        'browserstack.key': process.env.BROWSERSTACK_ACCESS_KEY,
+        'browserstack.user': 'bochen3',
+        'browserstack.key': 'WSumMh9qBwKCSDpe9FCz',
         'browserstack.debug': false,
         'browserstack.local': false,
         'browserstack.video': false,

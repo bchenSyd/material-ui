@@ -40,9 +40,10 @@
     "test:karma": "node test karma",
     "start-docs":"node docs/site/webpack.dev.server",
     "test:e2e": "node test e2e -e chrome_51",
-    "test:e2e:local":"node test e2e -l -e chrome",
+    "test:e2e:local":"node test e2e -l -e chrome",    
     "debug:test": "node --debug-brk --inspect test e2e -l -e chrome",
-    "test:night-watch:directly":"nightwatch -c test/nightwatch.local.conf.js -e chrome test/e2e",
+    "test:nightwatch:directly":"nightwatch -c test/nightwatch.local.conf.js -e chrome test/e2e",
+    "test:nightwatch:remote":"nightwatch -c test/nightwatch.conf.js -e chrome_51 test/e2e",
     "test:e2e:all": "node test e2e -e chrome_51,safari_9,firefox_46,ie_edge,ie_10",
     "test:regressions": "node test regressions -l",
     "flow": "flow"
