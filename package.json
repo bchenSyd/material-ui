@@ -38,6 +38,7 @@
     "test:watch": "node test mocha -w",
     "test:coverage": "istanbul cover test/index.js -- mocha",
     "test:karma": "node test karma",
+    "start-docs":"node docs/site/webpack.dev.server",
     "test:e2e": "node test e2e -e chrome_51",
     "test:e2e:local":"node test e2e -l -e chrome",
     "debug:test": "node --debug-brk --inspect test e2e -l -e chrome",
