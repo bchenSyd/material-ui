@@ -12,3 +12,4 @@ coverage
 # npm files
 node_modules
 *.log
+**/yarn.lock

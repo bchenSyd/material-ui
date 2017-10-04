@@ -6,13 +6,16 @@ const SELENIUM_PORT = process.env.SELENIUM_LOCAL_PORT || 4444;
 module.exports = {
   output_folder: 'test/selenium-output',
   selenium: {
-    start_process: false,
-    host: SELENIUM_HOST,
-    port: SELENIUM_PORT,
+    start_process: true,
+    server_path: './test/bin/selenium-server-standalone-2.40.0.jar',
+    log_path: '',
+    cli_args: {
+      'webdriver.chrome.driver': './test/bin/chromedriver.exe',
+    },
   },
   test_settings: {
     default: {
-      launch_url: process.env.SELENIUM_LAUNCH_URL,
+      launch_url: 'http://localhost:8080',//process.env.SELENIUM_LAUNCH_URL,
       selenium_host: SELENIUM_HOST,
       selenium_port: SELENIUM_PORT,
       silent: true,

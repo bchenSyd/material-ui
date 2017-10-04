@@ -3,7 +3,7 @@
 
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
-const webpackConfig = require('./webpack.dev.config');
+const webpackConfig = require('./webpack.prod.config');
 
 const serverOptions = {
   publicPath: webpackConfig.output.publicPath,
@@ -18,7 +18,7 @@ const serverOptions = {
   },
 };
 
-const PORT = 3000;
+const PORT = 8080;
 
 new WebpackDevServer(webpack(webpackConfig), serverOptions)
   .listen(PORT, '0.0.0.0', (err) => {

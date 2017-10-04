@@ -8,11 +8,7 @@ module.exports = {
   devtool: 'inline-source-map',
   context: path.resolve(__dirname),
   entry: {
-    main: [
-      'eventsource-polyfill', // hot reloading in IE
-      'react-hot-loader/patch',
-      'webpack-dev-server/client?http://0.0.0.0:3000',
-      'webpack/hot/only-dev-server',
+    main: [      
       './src/index',
     ],
   },
@@ -54,6 +50,6 @@ module.exports = {
   },
   progress: true,
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+   
   ],
 };

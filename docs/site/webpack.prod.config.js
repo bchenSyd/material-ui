@@ -2,6 +2,9 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const chalk = require('chalk');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+
 
 module.exports = {
   context: path.resolve(__dirname),
@@ -13,7 +16,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
-    publicPath: 'build/',
+    publicPath: '/build/',
   },
   module: {
     loaders: [
@@ -61,6 +64,10 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
       },
+    }),
+    new ProgressBarPlugin({
+      format: ' building [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
+      clear: false
     }),
   ],
 };

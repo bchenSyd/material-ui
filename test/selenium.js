@@ -63,7 +63,8 @@ function runSeleniumTests(options) {
 
       childProcess.exec('git rev-parse --short HEAD', (err, stdout) => {
         process.env.MUI_HASH = stdout;
-        initLocalTunnel(execTests);
+        // initLocalTunnel(execTests);
+        execTests();
       });
     });
   }
