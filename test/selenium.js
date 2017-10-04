@@ -25,7 +25,7 @@ function runSeleniumTests(options) {
       } else {
         process.env.SELENIUM_LAUNCH_URL = url;
         console.log(`Connected to ${url} (proxy to http://locahost:8080)`);
-        //cb();
+        cb();
       }
     });
   }
