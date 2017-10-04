@@ -1,7 +1,7 @@
 // @flow weak
 
 const path = require('path');
-const webpackConfig = require('../docs/site/webpack.prod.config');
+const webpackConfig = require('../docs/site/webpack.dev.config');
 const runSeleniumTests = require('./selenium');
 
 function runE2ETests(options = {}) {
