@@ -21,6 +21,7 @@ yarn selenium-standalone install
 
 ## yarn selenium-standalone install
 
+## yarn docs:start
 ## yarn run test:e2e:local
 
 ## how does nightwatch works?

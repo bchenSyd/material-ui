@@ -19,7 +19,19 @@ function runSeleniumTests(options) {
   const server = httpServer.createServer({ root: serverRoot });
 
   function initLocalTunnel(cb) {
-    ngrok.connect(8080, (err, url) => {
+    // https://stackoverflow.com/a/45494621
+    // https://ngrok.com/docs#config
+    // When forwarding to a local port, ngrok does not modify the tunneled HTTP requests at all, 
+    // they are copied to your server byte-for-byte as they are received. 
+    // Some application servers like WAMP, MAMP and pow use the Host header for determining which development site to display. 
+    // For this reason, ngrok can rewrite your requests with a modified Host header.
+    //  Use the -host-header switch to rewrite incoming HTTP requests.
+    // If rewrite is specified, the Host header will be rewritten to match the hostname portion of the forwarding address. 
+    // Any other value will cause the Host header to be rewritten to that value.
+    ngrok.connect({
+      addr: 8080,
+      host_header: "rewrite",
+    }, (err, url) => {
       if (err) {
         throw err;
       } else {
@@ -100,9 +112,10 @@ function runSeleniumTests(options) {
 
   // use buildSite() if you want to build site and run it everytime;
   // use kickStart() after you run `cd docs/site && yarn start` so that you can run test directly;
-   buildSite();
-  // kickStart();
-
+  // buildSite();
+   kickStart();
+  //initLocalTunnel(require('lodash').noop)
+    
   process.on('exit', cleanUp);
   process.on('SIGINT', cleanUp);
   process.on('uncaughtException', cleanUp);

@@ -2,7 +2,7 @@
 
 const SELENIUM_HOST = process.env.SELENIUM_LOCAL_HOST || '127.0.0.1';
 // https://github.com/nightwatchjs/nightwatch/issues/1673
-const SELENIUM_PORT = process.env.SELENIUM_LOCAL_PORT || 12345; // 4444 doesn't work on macbook
+const SELENIUM_PORT = process.env.SELENIUM_LOCAL_PORT || 4444; // 4444 doesn't work on macbook
 
 module.exports = {
   output_folder: 'test/selenium-output',
