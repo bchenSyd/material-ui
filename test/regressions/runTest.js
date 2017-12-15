@@ -8,7 +8,7 @@ function runTest(testFn) {
     return function regressions(browser) {
       browser
         .url(`${browser.launch_url}/#/${testPath}`)
-        .waitForElementVisible('[data-reactroot]', 6000)
+        .waitForElementVisible('[data-reactroot]', 12000)
         .perform((client, done) => testFn(client, testPath, done));
     };
   }

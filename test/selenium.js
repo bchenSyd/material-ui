@@ -32,7 +32,7 @@ function runSeleniumTests(options) {
 
   function execTests() {
     const child = childProcess.spawn(
-      '.\\node_modules\\.bin\\nightwatch.cmd',
+      './node_modules/.bin/nightwatch',
       [
         '-c',
         local ? 'test/nightwatch.local.conf.js' : 'test/nightwatch.conf.js',
@@ -52,7 +52,7 @@ function runSeleniumTests(options) {
 
     child.on('error', (childErr) => {
       console.log(childErr);
-      throw childErr;
+     // throw childErr;
     });
   }
 
@@ -66,6 +66,16 @@ function runSeleniumTests(options) {
         process.env.MUI_HASH = stdout;
         initLocalTunnel(execTests);
       });
+    });
+  }
+
+  function kickStart() {
+    // you go to docs/site and run `yarn start` yourself so that http://localhost:8080 is up;
+    console.log('Server listening on port 8080\n--------------------------');
+
+    childProcess.exec('git rev-parse --short HEAD', (err, stdout) => {
+      process.env.MUI_HASH = stdout;
+      initLocalTunnel(execTests);
     });
   }
 
@@ -88,8 +98,10 @@ function runSeleniumTests(options) {
     });
   }
 
-  // Kick it off
-  buildSite();
+  // use buildSite() if you want to build site and run it everytime;
+  // use kickStart() after you run `cd docs/site && yarn start` so that you can run test directly;
+   buildSite();
+  // kickStart();
 
   process.on('exit', cleanUp);
   process.on('SIGINT', cleanUp);
