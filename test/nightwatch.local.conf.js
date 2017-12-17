@@ -10,53 +10,63 @@ const SELENIUM_PORT = process.env.SELENIUM_LOCAL_PORT || 4444; // 4444 doesn't w
 
 module.exports = {
   src_folders: ['test/e2e'],
-  output_folder: 'test/selenium-output',
-  "selenium": {
-    "start_process": true,
-    // "server_path": "./test/bin/selenium-server-standalone-2.40.0.jar",
-    "server_path": seleniumServer.path,
-    "log_path": "test/e2e-log",
-    "port": SELENIUM_PORT, // tell selenium to listen on #port;
+  output_folder: 'test/reports',
+  live_output: false,
+  disable_colors: false,
+  selenium: {
+    start_process: true ,
+    server_path: seleniumServer.path,
+    log_path: "test/e2e-log",
+    host: SELENIUM_HOST,
+    port: SELENIUM_PORT
   },
   test_settings: {
     default: {
       launch_url: process.env.SELENIUM_LAUNCH_URL, // http://localhost:8080
       selenium_host: SELENIUM_HOST,
       selenium_port: SELENIUM_PORT,  // tell nightwatch to connect to selenium #port
-      silent: true,
-      desiredCapabilities: {
-        browserName: 'phantomjs',
-        javascriptEnabled: true,
-        acceptSslCerts: true,
+      desiredCapabilities : {
+        browserName : "phantomjs",
+        javascriptEnabled : true,
+        acceptSslCerts : true,
         'phantomjs.binary.path': phantomjs.path
       }
     },
-    chrome: {
-      desiredCapabilities: {
-        browserName: 'chrome',
-        chromeOptions: {
-          args: ['--start-maximized'],
-        },
-        javascriptEnabled: true,
-        acceptSslCerts: true
-      },
-      selenium: {
-        cli_args: {
-          'webdriver.chrome.driver': chromedriver.path,
-        }
+    phantomjs:{
+      desiredCapabilities : {
+        browserName : "phantomjs",
+        javascriptEnabled : true,
+        acceptSslCerts : true,
+        "phantomjs.binary.path" : "test/phantomjs-2.1.1/bin/phantomjs",
+        "phantomjs.cli.args" : []
       }
     },
-    firefox: {
-      desiredCapabilities: {
-        browserName: 'firefox',
-        javascriptEnabled: true,
-        marionette: true
-      },
-      selenium: {
-        cli_args: {
-          'webdriver.gecko.driver': geckodriver.path
-        }
-      }
-    }
+    // chrome: {
+    //   desiredCapabilities: {
+    //     browserName: 'chrome',
+    //     chromeOptions: {
+    //       args: ['--start-maximized'],
+    //     },
+    //     javascriptEnabled: true,
+    //     acceptSslCerts: true
+    //   },
+    //   selenium: {
+    //     cli_args: {
+    //       'webdriver.chrome.driver': chromedriver.path,
+    //     }
+    //   }
+    // },
+    // firefox: {
+    //   desiredCapabilities: {
+    //     browserName: 'firefox',
+    //     javascriptEnabled: true,
+    //     marionette: true
+    //   },
+    //   selenium: {
+    //     cli_args: {
+    //       'webdriver.gecko.driver': geckodriver.path
+    //     }
+    //   }
+    // }
   },
 };

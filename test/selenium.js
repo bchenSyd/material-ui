@@ -9,8 +9,7 @@ const writeFile = require('./utils/writeFile');
 function runSeleniumTests(options) {
   const {
     local = false,
-    environment = 'chrome',
-    tests = 'test/e2e',
+    environment = 'default',
     webpackConfig,
     serverRoot,
   } = options;
@@ -30,7 +29,7 @@ function runSeleniumTests(options) {
     // Any other value will cause the Host header to be rewritten to that value.
     ngrok.connect({
       addr: 8080,
-      host_header: "rewrite",
+      host_header: 'rewrite',
     }, (err, url) => {
       if (err) {
         throw err;
@@ -50,10 +49,9 @@ function runSeleniumTests(options) {
         local ? 'test/nightwatch.local.conf.js' : 'test/nightwatch.conf.js',
         '-e',
         environment,
-       // tests,
       ],
       {
-        stdio: [0, 1, 2], //calling-process.stdin: 0, calling-process.stdout:1, calling-process.err:2
+        stdio: [0, 1, 2], // calling-process.stdin: 0, calling-process.stdout:1, calling-process.err:2
       },
     );
 
@@ -64,7 +62,7 @@ function runSeleniumTests(options) {
 
     child.on('error', (childErr) => {
       console.log(childErr);
-     // throw childErr;
+      // throw childErr;
     });
   }
 
@@ -113,9 +111,9 @@ function runSeleniumTests(options) {
   // use buildSite() if you want to build site and run it everytime;
   // use kickStart() after you run `yarn docs:start` so that you can run test directly;
   // buildSite();
-   kickStart();
-  //initLocalTunnel(require('lodash').noop)
-    
+  kickStart();
+  // initLocalTunnel(require('lodash').noop)
+
   process.on('exit', cleanUp);
   process.on('SIGINT', cleanUp);
   process.on('uncaughtException', cleanUp);
