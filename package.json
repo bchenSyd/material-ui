@@ -39,8 +39,8 @@
     "test:coverage": "istanbul cover test/index.js -- mocha",
     "test:karma": "node test karma",
     "start-docs": "node docs/site/webpack.dev.server",
-    "test:e2e": "node test e2e -l -e default",
-    "test:e2e:direct": "nightwatch -c test/nightwatch.local.conf.js -e phantomjs",
+    "test:e2e": "node test e2e -l",
+    "test:e2e:direct": "(echo \"won't work becuase env is missing\n\n\"; nightwatch -c test/nightwatch.local.conf.js)",
     "test:e2e:chrome": "node test e2e -l -e chrome",
     "test:e2e:chrome2": "nightwatch -c test/nightwatch.local.conf.js -e chrome",
     "test:e2e:ff": "node test e2e -l -e firefox",
@@ -142,7 +142,7 @@
     "recast": "^0.11.20",
     "recursive-readdir-sync": "^1.0.6",
     "rimraf": "^2.5.2",
-    "selenium-server": "^3.8.1",
+    "selenium-server": "<=3.7.1",
     "sinon": "^1.17.7",
     "webpack": "^1.14.0"
   }

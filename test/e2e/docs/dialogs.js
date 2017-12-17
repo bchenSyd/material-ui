@@ -7,9 +7,19 @@ module.exports = {
       .url(`${browser.launch_url}/#/component-demos/dialogs`)
       .waitForElementVisible('[data-reactroot]', 12000) // an element that has attribute "data-reactroot";
       // selenium css selectors, see https://saucelabs.com/resources/articles/selenium-tips-css-selectors
-      .assert.visible('button[class*="Button-root"]') // *= Match a substring 
+      /*
+      There are there important special characters:
+      1. '^' symbol, represents the starting text in a string.
+      2. '$' symbol represents the ending text in a string.
+      3. '*' symbol represents contains text in a string.
+      */
+      .assert.visible('button[class*="Button-root"]') // *= Match a sub string;
       .assert.visible('a[href$="app-bar"]') // $= Match a suffix
-      .assert.visible('button[class^="ButtonBase"]') // ^= Match a prefix
+      .assert.visible('div[class^="Demo-root"]') // ^= Match a prefix
+
+      //  .assert.visible('button[class^="ButtonBase"]') // this wont' work because the first button.ButtonBase* is invisible;
+                                                         // it bydefault takes the first element meet the query
+
       .assert.elementNotPresent('[data-mui-test="Modal"]')
       .assert.visible('a[class*=Home-button]')
       .waitForElementVisible('[data-mui-test="Modal"]', 10000)

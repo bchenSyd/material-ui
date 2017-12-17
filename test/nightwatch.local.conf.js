@@ -32,15 +32,6 @@ module.exports = {
         'phantomjs.binary.path': phantomjs.path
       }
     },
-    phantomjs:{
-      desiredCapabilities : {
-        browserName : "phantomjs",
-        javascriptEnabled : true,
-        acceptSslCerts : true,
-        "phantomjs.binary.path" : "test/phantomjs-2.1.1/bin/phantomjs",
-        "phantomjs.cli.args" : []
-      }
-    },
     // chrome: {
     //   desiredCapabilities: {
     //     browserName: 'chrome',
