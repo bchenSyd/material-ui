@@ -50,7 +50,7 @@ function runSeleniumTests(options) {
         local ? 'test/nightwatch.local.conf.js' : 'test/nightwatch.conf.js',
         '-e',
         environment,
-        tests,
+       // tests,
       ],
       {
         stdio: [0, 1, 2], //calling-process.stdin: 0, calling-process.stdout:1, calling-process.err:2
@@ -111,7 +111,7 @@ function runSeleniumTests(options) {
   }
 
   // use buildSite() if you want to build site and run it everytime;
-  // use kickStart() after you run `cd docs/site && yarn start` so that you can run test directly;
+  // use kickStart() after you run `yarn docs:start` so that you can run test directly;
   // buildSite();
    kickStart();
   //initLocalTunnel(require('lodash').noop)

@@ -1,28 +1,35 @@
-/* eslint-disable flowtype/require-valid-file-annotation */
+/* eslint-disable */
+const seleniumServer = require('selenium-server');
+const chromedriver = require('chromedriver');
+const geckodriver = require('geckodriver');
+const phantomjs = require('phantomjs-prebuilt');
 
 const SELENIUM_HOST = process.env.SELENIUM_LOCAL_HOST || '127.0.0.1';
 // https://github.com/nightwatchjs/nightwatch/issues/1673
 const SELENIUM_PORT = process.env.SELENIUM_LOCAL_PORT || 4444; // 4444 doesn't work on macbook
 
 module.exports = {
+  src_folders: ['test/e2e'],
   output_folder: 'test/selenium-output',
   "selenium": {
     "start_process": true,
     // "server_path": "./test/bin/selenium-server-standalone-2.40.0.jar",
-    "server_path": "node_modules/selenium-standalone/.selenium/selenium-server/3.7.1-server.jar",
-    "log_path": "",
-    "port":SELENIUM_PORT, // tell selenium to listen on #port;
-    "cli_args": {
-      // "webdriver.chrome.driver": "./test/bin/chromedriver.exe",
-      "webdriver.chrome.driver": "node_modules/selenium-standalone/.selenium/chromedriver/2.33-x64-chromedriver"
-    },
+    "server_path": seleniumServer.path,
+    "log_path": "test/e2e-log",
+    "port": SELENIUM_PORT, // tell selenium to listen on #port;
   },
   test_settings: {
     default: {
-      launch_url: process.env.SELENIUM_LAUNCH_URL,
+      launch_url: process.env.SELENIUM_LAUNCH_URL, // http://localhost:8080
       selenium_host: SELENIUM_HOST,
       selenium_port: SELENIUM_PORT,  // tell nightwatch to connect to selenium #port
       silent: true,
+      desiredCapabilities: {
+        browserName: 'phantomjs',
+        javascriptEnabled: true,
+        acceptSslCerts: true,
+        'phantomjs.binary.path': phantomjs.path
+      }
     },
     chrome: {
       desiredCapabilities: {
@@ -30,7 +37,26 @@ module.exports = {
         chromeOptions: {
           args: ['--start-maximized'],
         },
+        javascriptEnabled: true,
+        acceptSslCerts: true
       },
+      selenium: {
+        cli_args: {
+          'webdriver.chrome.driver': chromedriver.path,
+        }
+      }
     },
+    firefox: {
+      desiredCapabilities: {
+        browserName: 'firefox',
+        javascriptEnabled: true,
+        marionette: true
+      },
+      selenium: {
+        cli_args: {
+          'webdriver.gecko.driver': geckodriver.path
+        }
+      }
+    }
   },
 };

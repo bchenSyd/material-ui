@@ -5,11 +5,11 @@ module.exports = {
     browser
       .maximizeWindow()
       .url(`${browser.launch_url}/#/component-demos/dialogs`)
-      .waitForElementVisible('[data-reactroot]', 12000)
+      .waitForElementVisible('[data-reactroot]', 12000) // an element that has attribute "data-reactroot";
       // selenium css selectors, see https://saucelabs.com/resources/articles/selenium-tips-css-selectors
-      .assert.visible('a[class*="Button-root"]') // *= Match a substring 
-      .assert.visible('a[href$="installation"]') // $= Match a suffix
-      .assert.visible('a[class^="Home-button"]') // ^= Match a prefix
+      .assert.visible('button[class*="Button-root"]') // *= Match a substring 
+      .assert.visible('a[href$="app-bar"]') // $= Match a suffix
+      .assert.visible('button[class^="ButtonBase"]') // ^= Match a prefix
       .assert.elementNotPresent('[data-mui-test="Modal"]')
       .assert.visible('a[class*=Home-button]')
       .waitForElementVisible('[data-mui-test="Modal"]', 10000)
