@@ -8,11 +8,14 @@ const writeFile = require('./utils/writeFile');
 
 // main loop; selenium main loop;
 function runSeleniumTests(options) {
+  debugger;
   const {
     local = false,
     environment = 'default',
     webpackConfig,
     serverRoot,
+    // /opt/git/material-ui/test/regressions.js:11 
+    tests = 'test/e2e' // when running regressions, it's overridden
   } = options;
  // const compiler = webpack(webpackConfig);
 
@@ -52,6 +55,7 @@ function runSeleniumTests(options) {
         local ? 'test/nightwatch.local.conf.js' : 'test/nightwatch.conf.js',
         '-e',
         environment,
+        tests,
       ],
       {
         stdio: [0, 1, 2], // calling-process.stdin: 0, calling-process.stdout:1, calling-process.err:2

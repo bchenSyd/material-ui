@@ -20,12 +20,12 @@ function buildTest(testFn /*performRegressionTest in ./index.js*/) {
     // /opt/git/material-ui/test/regression/site/src/Avatar/IconAvatar
     const testPath = value.replace(/^.*?tests\/(.*).js$/i, '$1');
     //#######################################################################
-    
+
     acc[testPath] = test_generator(testPath);
-    return ac;
+    return acc;
   }
 
-  return glob
+  const regression_tests = glob
     .sync(path.resolve(__dirname, 'site/src/tests/**/*.js'))
     .reduce(reduceTests, {
       // init object;
@@ -38,6 +38,8 @@ function buildTest(testFn /*performRegressionTest in ./index.js*/) {
         browser.end();
       },
     });
+  console.log(regression_tests);  
+  return regression_tests;
 }
 
 module.exports = buildTest;
