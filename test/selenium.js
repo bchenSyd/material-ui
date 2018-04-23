@@ -49,7 +49,7 @@ function runSeleniumTests(options) {
     const child = childProcess.spawn(
       'node',
       [
-        '--inspect-brk', //debug nightwatch;
+        //'--inspect-brk', //debug nightwatch; bochen; debug nigthwatch.js
         'node_modules/.bin/nightwatch',
         '-c',
         local ? 'test/nightwatch.local.conf.js' : 'test/nightwatch.conf.js',
