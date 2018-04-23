@@ -3,7 +3,8 @@
 const path = require('path');
 const glob = require('glob');
 
-function runTest(testFn) {
+function runTest(testFn /**/) {
+  debugger;
   function tests(testPath) {
     return function regressions(browser) {
       browser

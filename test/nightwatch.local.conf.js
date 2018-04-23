@@ -1,7 +1,7 @@
 /* eslint-disable */
 const seleniumServer = require('selenium-server');
 const chromedriver = require('chromedriver');
-const geckodriver = require('geckodriver');
+//const geckodriver = require('geckodriver');
 const phantomjs = require('phantomjs-prebuilt');
 
 const SELENIUM_HOST = process.env.SELENIUM_LOCAL_HOST || '127.0.0.1';

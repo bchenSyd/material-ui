@@ -6,6 +6,7 @@ const webpack = require('webpack');
 const httpServer = require('http-server');
 const writeFile = require('./utils/writeFile');
 
+// main loop; selenium main loop;
 function runSeleniumTests(options) {
   const {
     local = false,
@@ -13,7 +14,7 @@ function runSeleniumTests(options) {
     webpackConfig,
     serverRoot,
   } = options;
-  const compiler = webpack(webpackConfig);
+ // const compiler = webpack(webpackConfig);
 
   const server = httpServer.createServer({ root: serverRoot });
 
@@ -43,8 +44,10 @@ function runSeleniumTests(options) {
 
   function execTests() {
     const child = childProcess.spawn(
-      './node_modules/.bin/nightwatch',
+      'node',
       [
+        '--inspect-brk', //debug nightwatch;
+        'node_modules/.bin/nightwatch',
         '-c',
         local ? 'test/nightwatch.local.conf.js' : 'test/nightwatch.conf.js',
         '-e',
@@ -89,6 +92,7 @@ function runSeleniumTests(options) {
     });
   }
 
+
   function cleanUp() {
     ngrok.disconnect();
     ngrok.kill();
@@ -111,7 +115,9 @@ function runSeleniumTests(options) {
   // use buildSite() if you want to build site and run it everytime;
   // use kickStart() after you run `yarn docs:start` so that you can run test directly;
   // buildSite();
-  kickStart();
+  // kickStart();
+  console.log('make sure your localhost:8080 is listening!!!\n--------------------------');
+  execTests();
   // initLocalTunnel(require('lodash').noop)
 
   process.on('exit', cleanUp);

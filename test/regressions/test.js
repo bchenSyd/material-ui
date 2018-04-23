@@ -51,31 +51,36 @@ function compareScreenshots(client, baselinePath, screenshotPath, done) {
   });
 }
 
-function performRegressionTest(client, testPath, done) {
-  client.session(({ value }) => {
+function performRegressionTest(client, testPath /*Avatar/IconAvat, or Button/flatButton*/, done) {
+  client.session(({ value /*browsername, version, platform*/ }) => {
     const profile = `${value.browserName.toLowerCase()}-${
       value.version}-${value.platform.toLowerCase()}`;
     const screenshotPath = path.resolve(__dirname, `screenshots/output/${testPath}/${profile}.png`);
-    const baselinePath = path.resolve(__dirname, `screenshots/baseline/${testPath}/${profile}.png`);
+    const baselinePath = path.resolve(__dirname, `screenshots/baseline/${testPath/*Avatar/IconAvat*/}/${profile/*chrome-ver-linux.png*/}.png`);
 
     // Makes sure the path is visible to the calling process.
     fs.access(baselinePath, fs.F_OK, (err) => {
-      client.assert.strictEqual(!err, true, `should have a baseline image: ${baselinePath}`);
+      client.assert.strictEqual(!err, true, `should have a baseline image: ${baselinePath}`); // if no baseimage created; throw error here (assert)
 
-      if (!err) {
+      //####################################################################################################################]
+      if (!err) { // found a base image; 
         client.windowHandle((handle) => {
           client.windowSize(handle.value, (size) => {
+            // instruct nightwatch to take sreensot ==> selenium server ==> selenium client take screensot
+            // in the case of remote run, will screenshot be passed back??
             return screenshotElement(
               client,
-              screenshotPath,
+              screenshotPath, /*local screenshot path*/
               size.value,
               () => compareScreenshots(client, baselinePath, screenshotPath, done)
             );
           });
         });
       } else {
-        done();
+        done(); // this is image comparison method passed in;
       }
+      //####################################################################################################################
+      
     });
   });
 }
