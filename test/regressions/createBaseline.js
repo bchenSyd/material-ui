@@ -1,6 +1,6 @@
 /* eslint-disable flowtype/require-valid-file-annotation,no-console */
 const path = require('path');
-const runTest = require('./runTest');
+const buildTest = require('./buildTest');
 const screenshotElement = require('./screenshotElement');
 
 function createBaseline(client, testPath, done) {
@@ -16,4 +16,4 @@ function createBaseline(client, testPath, done) {
   });
 }
 
-module.exports = runTest(createBaseline);
+module.exports = buildTest(createBaseline);

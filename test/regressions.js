@@ -8,7 +8,7 @@ function runRegressionsTests(options = {}) {
   return runSeleniumTests({
     webpackConfig,
     serverRoot: path.resolve(__dirname, 'regressions/site'),
-    tests: createBaseline ? 'test/regressions/createBaseline.js' : 'test/regressions/test.js',
+    tests: createBaseline ? 'test/regressions/createBaseline.js' : 'test/regressions/index.js',
     ...other,
   });
 }

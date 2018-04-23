@@ -5,7 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 const BlinkDiff = require('blink-diff');
-const runTest = require('./runTest');
+const buildTest = require('./buildTest');
 const screenshotElement = require('./screenshotElement');
 
 function compareScreenshots(client, baselinePath, screenshotPath, done) {
@@ -85,4 +85,4 @@ function performRegressionTest(client, testPath /*Avatar/IconAvat, or Button/fla
   });
 }
 
-module.exports = runTest(performRegressionTest);
+module.exports = buildTest(performRegressionTest);
