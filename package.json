@@ -50,7 +50,7 @@
     "debug-e2e": "node debugNightWatch",
     "test:e2e:all": "node test e2e -e chrome_51,safari_9,firefox_46,ie_edge,ie_10",
     "test:regressions:baseline": "node test/index.js regressions -l -c",
-    "test:regressions": "node test/index.js regressions -l",
+    "test:regressions": "rm -rf test/regressions/screenshots/output && node test/index.js regressions -l",
     "debug-regression":"node --inspect-brk test/index.js regressions -l",
     "flow": "flow"
   },
