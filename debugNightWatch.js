@@ -1,3 +1,38 @@
+//###################################################################################################
+
+                        // main loop is at test/selenium.js
+                        // uncomment --inspect-brk will start debugging nightwatch
+
+//###################################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* eslint-disable */
 var childProcess = require('child_process');
@@ -29,7 +64,7 @@ function execTests() {
         'test/nightwatch.local.conf.js',
         '-e',
         'chrome',
-        'test/e2e',
+        'test/e2e', // nightwatch alow you to pass tests
       ],
       {
         stdio: [0, 1, 2], //calling-process.stdin: 0, calling-process.stdout:1, calling-process.err:2
