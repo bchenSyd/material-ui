@@ -51,7 +51,9 @@
     "test:e2e:all": "node test e2e -e chrome_51,safari_9,firefox_46,ie_edge,ie_10",
     "test:regressions:baseline": "node test/index.js regressions -l -c",
     "test:regressions": "rm -rf test/regressions/screenshots/output && node test/index.js regressions -l",
-    "debug-regression":"node --inspect-brk test/index.js regressions -l",
+    "test:regressions:chrome": "rm -rf test/regressions/screenshots/output && node test/index.js regressions -l -e chrome",
+
+    "debug-regression":"node --inspect-brk test/index.js regressions -l -e chrome ",
     "flow": "flow"
   },
   "peerDependencies": {

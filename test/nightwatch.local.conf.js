@@ -22,7 +22,7 @@ module.exports = {
   },
   test_settings: {
     default: {
-      launch_url: process.env.SELENIUM_LAUNCH_URL, // http://localhost:8080
+      launch_url: process.env.SELENIUM_LAUNCH_URL, // http://localhost:3333
       selenium_host: SELENIUM_HOST,
       selenium_port: SELENIUM_PORT,  // tell nightwatch to connect to selenium #port
       desiredCapabilities : {
@@ -32,21 +32,24 @@ module.exports = {
         'phantomjs.binary.path': phantomjs.path
       }
     },
-    // chrome: {
-    //   desiredCapabilities: {
-    //     browserName: 'chrome',
-    //     chromeOptions: {
-    //       args: ['--start-maximized'],
-    //     },
-    //     javascriptEnabled: true,
-    //     acceptSslCerts: true
-    //   },
-    //   selenium: {
-    //     cli_args: {
-    //       'webdriver.chrome.driver': chromedriver.path,
-    //     }
-    //   }
-    // },
+    chrome: {
+      launch_url: process.env.SELENIUM_LAUNCH_URL, // http://localhost:3333
+      selenium_host: SELENIUM_HOST,
+      selenium_port: SELENIUM_PORT,  // tell nightwatch to connect to selenium #port
+      desiredCapabilities: {
+        browserName: 'chrome',
+        chromeOptions: {
+          args: ['--start-maximized'],
+        },
+        javascriptEnabled: true,
+        acceptSslCerts: true
+      },
+      selenium: {
+        cli_args: {
+          'webdriver.chrome.driver': chromedriver.path,
+        }
+      }
+    },
     // firefox: {
     //   desiredCapabilities: {
     //     browserName: 'firefox',

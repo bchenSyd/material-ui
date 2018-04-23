@@ -68,11 +68,12 @@ program
   .command('regressions')
   .description('Run the visual regression tests')
   .option('-l, --local', 'Use nightwatch.local.conf.js')
-  .option('-e, --environment', 'Comma separated string of browser test environment names')
+  .option('-e, --environment [dummy]', 'Comma separated string of browser test environment names')
   .option('-c, --create-baseline', 'Create the baseline images instead of running a test')
   .action((command) => {
-    const { local, browsers, createBaseline } = command;
-    return runRegressionsTests({ local, browsers, createBaseline });
+    console.log(command);
+    const { local, browsers, createBaseline, environment } = command;
+    return runRegressionsTests({ local, browsers, createBaseline , environment});
   });
 
 if (!process.argv.slice(2).length) {
