@@ -116,12 +116,18 @@ function runSeleniumTests(options) {
     });
   }
 
+  const startRegression = ()=>{
+    console.log('make sure cd regressions/site/; npm install; inpm start; localhost:3333\n--------------------------');
+    process.env.SELENIUM_LAUNCH_URL='http://localhost:3333';
+    execTests();
+  }
+
   // use buildSite() if you want to build site and run it everytime;
   // use kickStart() after you run `yarn docs:start` so that you can run test directly;
   // buildSite();
   // kickStart();
-  console.log('make sure your localhost:8080 is listening!!!\n--------------------------');
-  execTests();
+  startRegression();
+
   // initLocalTunnel(require('lodash').noop)
 
   process.on('exit', cleanUp);
