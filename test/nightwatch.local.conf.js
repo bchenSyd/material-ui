@@ -15,7 +15,7 @@ module.exports = {
   disable_colors: false,
   selenium: {
     start_process: true ,
-    server_path: seleniumServer.path,
+    server_path: seleniumServer.path, // install selenium-server from package
     log_path: "test/e2e-log",
     host: SELENIUM_HOST,
     port: SELENIUM_PORT
