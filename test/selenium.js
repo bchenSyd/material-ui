@@ -117,7 +117,7 @@ function runSeleniumTests(options) {
   }
 
   const startRegression = ()=>{
-    console.log('make sure cd regressions/site/; npm install; inpm start; localhost:3333\n--------------------------');
+    console.log('make sure cd regressions/site/; npm install; npm start; localhost:3333\n--------------------------');
     process.env.SELENIUM_LAUNCH_URL='http://localhost:3333';
     execTests();
   }

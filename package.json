@@ -40,7 +40,7 @@
     "test:karma": "node test karma",
     "start-docs": "node docs/site/webpack.dev.server",
     "test:e2e": "node test e2e -l",
-    "test:e2e:direct": "(echo \"won't work becuase env is missing\n\n\"; nightwatch -c test/nightwatch.local.conf.js)",
+    "test:e2e:direct": "(echo \"won't work because env is missing\n\n\"; nightwatch -c test/nightwatch.local.conf.js)",
     "test:e2e:chrome": "node test e2e -l -e chrome",
     "test:e2e:chrome2": "nightwatch -c test/nightwatch.local.conf.js -e chrome",
     "test:e2e:ff": "node test e2e -l -e firefox",
@@ -52,8 +52,7 @@
     "test:regressions:baseline": "node test/index.js regressions -l -c",
     "test:regressions": "rm -rf test/regressions/screenshots/output && node test/index.js regressions -l",
     "test:regressions:chrome": "rm -rf test/regressions/screenshots/output && node test/index.js regressions -l -e chrome",
-
-    "debug-regression":"node --inspect-brk test/index.js regressions -l -e chrome ",
+    "debug-regression": "node --inspect-brk test/index.js regressions -l -e chrome ",
     "flow": "flow"
   },
   "peerDependencies": {
