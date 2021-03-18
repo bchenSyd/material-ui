@@ -1,5 +1,4 @@
 /* eslint-disable */
-const seleniumServer = require('selenium-server');
 const chromedriver = require('chromedriver');
 //const geckodriver = require('geckodriver');
 const phantomjs = require('phantomjs-prebuilt');
@@ -14,9 +13,7 @@ module.exports = {
   live_output: false,
   disable_colors: false,
   selenium: {
-    start_process: true ,
-    server_path: seleniumServer.path, // install selenium-server from package
-    log_path: "test/e2e-log",
+    start_process: false ,
     host: SELENIUM_HOST,
     port: SELENIUM_PORT
   },

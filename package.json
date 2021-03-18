@@ -40,11 +40,15 @@
     "test:karma": "node test karma",
     "start-docs": "node docs/site/webpack.dev.server",
     "test:e2e": "node test e2e -l",
-    "test:e2e:direct": "(echo \"won't work because env is missing\n\n\"; nightwatch -c test/nightwatch.local.conf.js)",
     "test:e2e:chrome": "node test e2e -l -e chrome",
-    "test:e2e:chrome2": "nightwatch -c test/nightwatch.local.conf.js -e chrome",
+
+
+    "test:e2e:chrome:no-boot:info":"echo make sure cd test/regressions/site/; npm install; npm start; localhost:3333",
+    "test:e2e:chrome:no-boot": "nightwatch -c test/nightwatch.local.conf.js -e chrome",
     "test:e2e:ff": "node test e2e -l -e firefox",
-    "test:e2e:ff2": "nightwatch -c test/nightwatch.local.conf.js -e firefox",
+    "test:e2e:ff:no-boot": "nightwatch -c test/nightwatch.local.conf.js -e firefox",
+
+
     "test:e2e:remote": "node test e2e -e chrome_51",
     "test:nightwatch:remote": "nightwatch -c test/nightwatch.conf.js -e chrome_51",
     "debug-e2e": "node debugNightWatch",
