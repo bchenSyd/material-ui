@@ -1,47 +1,18 @@
 // @flow weak
 
-import { AppContainer } from 'react-hot-loader';
-import RedBox from 'redbox-react';
-import React from 'react';
-import { render } from 'react-dom';
-import webFont from 'webfontloader';
-import App from './App';
+import React from "react";
+import { render } from "react-dom";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import RootRouter from "./Router";
 
-const rootEl = document.getElementById('app');
-
-function renderTree() {
-  render(
-    <AppContainer errorReporter={RedBox}>
-      <App />
-    </AppContainer>,
-    rootEl,
+function App(props) {
+  return (
+    <MuiThemeProvider {...props}>
+      <RootRouter />
+    </MuiThemeProvider>
   );
 }
 
-webFont.load({
-  google: {
-    families: [
-      'Roboto:300,400,500',
-      'Material+Icons',
-    ],
-  },
-  // This event is triggered when the fonts have rendered.
-  active: renderTree,
-  // This event is triggered when the browser does not support linked fonts.
-  inactive: renderTree,
-  // This event is triggered if the font can't be loaded.
-  fontinactive: renderTree,
-});
+const rootEl = document.getElementById("app");
 
-if (module.hot) {
-  module.hot.accept('./App', () => {
-    const NextApp = require('./App').default; // eslint-disable-line global-require
-
-    render(
-      <AppContainer errorReporter={RedBox}>
-        <NextApp />
-      </AppContainer>,
-      rootEl,
-    );
-  });
-}
+render(<App />, rootEl);

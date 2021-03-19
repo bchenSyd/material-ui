@@ -1,61 +1,55 @@
 // @flow weak
 
-import React, { Component, PropTypes } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
-import customPropTypes from 'material-ui/utils/customPropTypes';
+import React, { Component } from "react";
+import { createStyleSheet } from "jss-theme-reactor";
+import customPropTypes from "material-ui/utils/customPropTypes";
 
-const globalStyleSheet = createStyleSheet('global', (theme) => {
+const globalStyleSheet = createStyleSheet("global", (theme) => {
   const { palette, typography } = theme;
   return {
-    '@global': {
+    "@global": {
       html: {
-        boxSizing: 'border-box',
+        boxSizing: "border-box",
       },
-      '*, *:before, *:after': {
-        boxSizing: 'inherit',
+      "*, *:before, *:after": {
+        boxSizing: "inherit",
       },
       body: {
         margin: 0,
         background: palette.background.default,
         fontFamily: typography.fontFamily,
         color: palette.text.primary,
-        lineHeight: '1.2',
-        overflowX: 'hidden',
-        WebkitFontSmoothing: 'antialiased',
+        lineHeight: "1.2",
+        overflowX: "hidden",
+        WebkitFontSmoothing: "antialiased",
       },
       a: {
         color: palette.accent.A400,
-        textDecoration: 'none',
+        textDecoration: "none",
       },
-      'a:hover': {
-        textDecoration: 'underline',
+      "a:hover": {
+        textDecoration: "underline",
       },
       p: {
-        lineHeight: '1.6',
+        lineHeight: "1.6",
       },
     },
   };
 });
 
-const styleSheet = createStyleSheet('TestViewer', () => {
+const styleSheet = createStyleSheet("TestViewer", () => {
   return {
     root: {
-      display: 'flex',
-      width: '100%',
-      height: '100vh',
-      alignItems: 'center',
-      justifyContent: 'center',
+      display: "flex",
+      width: "100%",
+      height: "100vh",
+      alignItems: "center",
+      justifyContent: "center",
     },
   };
 });
 
 export default class TestViewer extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    dispatch: PropTypes.func,
-    routes: PropTypes.array,
-  };
-
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
   };
@@ -67,10 +61,6 @@ export default class TestViewer extends Component {
   render() {
     const { children } = this.props;
     const classes = this.context.styleManager.render(styleSheet);
-    return (
-      <div className={classes.root}>
-        {children}
-      </div>
-    );
+    return <div className={classes.root}>{children}</div>;
   }
 }

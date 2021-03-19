@@ -20,6 +20,7 @@ module.exports = {
     'material-ui',
   ],
   rules: {
+    'quotes':'off',
     'arrow-body-style': 'off', // Not our taste?
     'arrow-parens': ['error', 'always'], // airbnb use as-needed
     'consistent-this': ['error', 'self'],

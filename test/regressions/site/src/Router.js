@@ -2,10 +2,10 @@
 
 import React from 'react';
 import {
-  hashHistory,
-  Router as ReactRouter,
+  BrowserRouter as Router,
   Route,
-} from 'react-router';
+} from "react-router-dom";
+
 import TestViewer from './TestViewer';
 
 const requireTest = require.context('./tests', true, /js$/);
@@ -19,9 +19,9 @@ const tests = testFiles.reduce((res, n) => {
   return res;
 }, []);
 
-export default function Router() {
+export default function RootRouter() {
   return (
-    <ReactRouter history={hashHistory}>
+    <Router>
       <Route
         title="Material UI Regression Tests"
         path="/"
@@ -34,12 +34,12 @@ export default function Router() {
               key={test.name}
               title={test.name}
               testIndex={index}
-              path={test.routePath}
+              path={`/${test.routePath}`}
               component={requireTest(test.path).default}
             />
           );
         }))}
       </Route>
-    </ReactRouter>
+    </Router>
   );
 }
