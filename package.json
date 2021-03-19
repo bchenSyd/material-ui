@@ -41,6 +41,7 @@
     "start-docs": "node docs/site/webpack.dev.server",
     "test:regressions:chrome:info": "echo make sure cd test/regressions/site/; npm install; npm start; localhost:3333",
     "test:regressions:chrome:selenium": "docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:4.0.0-beta-2-20210317",
+    "e2e-screenshot": "node test/index.js regressions -l -c",
     "test:regressions:baseline": "node test/index.js regressions -l -c",
     "test:regressions": "rm -rf test/regressions/screenshots/output && node test/index.js regressions -l",
     "test:regressions:chrome": "rm -rf test/regressions/screenshots/output && node test/index.js regressions -l -e chrome",
