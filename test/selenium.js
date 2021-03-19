@@ -13,7 +13,7 @@ function runSeleniumTests(options) {
     const child = childProcess.spawn(
       "node",
       [
-        // '--inspect-brk',
+        //"--inspect-brk",
         "node_modules/.bin/nightwatch",
         "-c",
         local ? "test/nightwatch.local.conf.js" : "test/nightwatch.conf.js",

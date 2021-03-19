@@ -21,6 +21,7 @@ module.exports = {
       desiredCapabilities: {
         browserName: "chrome",
         chromeOptions: {
+          w3c: false,
           args: ["--start-maximized"],
         },
         javascriptEnabled: true,

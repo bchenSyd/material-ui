@@ -1,21 +1,17 @@
 // @flow weak
-const pngCrop = require("png-crop");
 
-// NOTE!!
-// the site can only contain one element per page
-// can't mix elementes in a page
+const pngCrop = require("png-crop");
 module.exports = function screenshotElement(
   client,
   screenshotPath,
   windowSize,
-  screenComparisonFn,
+  callback
 ) {
   client.element(
     "css selector",
     "[data-reactroot] > *:first-child", //always take the root element (first element under [data-reactroot])
-
     (element) => {
-      //rootelement found;
+      debugger;
       client.elementIdLocationInView(element.value.ELEMENT, (
         location /*element location in browser*/
       ) => {
@@ -46,11 +42,11 @@ module.exports = function screenshotElement(
                 if (err) {
                   throw err;
                 }
-                screenComparisonFn(); //
+                callback();
               });
             } else {
               // take a screenshot for entire browser window;
-              screenComparisonFn();
+              callback();
             }
           });
         });
