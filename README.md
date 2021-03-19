@@ -4,6 +4,8 @@ running inside the container.
 Here is an example with the standalone images, the same concept applies to the node images.
 ``` bash
 $ docker run -d -p 4444:4444 -p 5900:5900 -v /dev/shm:/dev/shm selenium/standalone-chrome:4.0.0-beta-2-20210317
+
+
 $ docker run -d -p 4444:4444 -p 5900:5900 -v /dev/shm:/dev/shm selenium/standalone-edge:4.0.0-beta-2-20210317
 $ docker run -d -p 4445:4444 -p 5901:5900 -v /dev/shm:/dev/shm selenium/standalone-firefox:4.0.0-beta-2-20210317
 $ docker run -d -p 4446:4444 -p 5902:5900 -v /dev/shm:/dev/shm selenium/standalone-opera:4.0.0-beta-2-20210317

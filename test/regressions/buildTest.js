@@ -3,11 +3,12 @@
 const path = require("path");
 const glob = require("glob");
 
+// **** here the auto-gen tests to be executed in selenium *********// 
 function buildTest(testFn /*performRegressionTest in ./index.js*/) {
   function testGenerator(testPath) {
     return function regressions(browser) {
       browser
-        .url(`${browser.launch_url}/#/${testPath}`)
+        .url(`${browser.launch_url}/${testPath}`)
         .waitForElementVisible("[data-reactroot]", 12000)
         .perform((client, done) => testFn(client, testPath, done));
     };
