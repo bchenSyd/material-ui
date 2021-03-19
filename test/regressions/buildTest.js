@@ -3,8 +3,8 @@
 const path = require("path");
 const glob = require("glob");
 
-// **** here the auto-gen tests to be executed in selenium *********// 
-function buildTest(testFn /*performRegressionTest in ./index.js*/) {
+// **** here the auto-gen tests to be executed in selenium *********//
+function buildTest(testFn /* createbaseline or performRegressionTest */) {
   function testGenerator(testPath) {
     return function regressions(browser) {
       browser

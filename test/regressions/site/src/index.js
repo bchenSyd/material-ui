@@ -8,7 +8,9 @@ import RootRouter from "./Router";
 function App(props) {
   return (
     <MuiThemeProvider {...props}>
-      <RootRouter />
+      <div data-reactroot>
+        <RootRouter />
+      </div>
     </MuiThemeProvider>
   );
 }
