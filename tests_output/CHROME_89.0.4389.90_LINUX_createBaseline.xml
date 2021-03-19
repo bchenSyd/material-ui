@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="49">
+
+  <testsuite name="createBaseline"
+    errors="0" failures="0" hostname="" id="" package="createBaseline" skipped="0"
+    tests="49" time="35.00" timestamp="">
+  
+    <testcase name="Avatar/IconAvatar" classname="createBaseline" time="1.359" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Avatar/ImageAvatar" classname="createBaseline" time="0.8510" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Avatar/LetterAvatar" classname="createBaseline" time="0.7620" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="BottomNavigation/LabelBottomNavigation" classname="createBaseline" time="0.8350" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="BottomNavigation/SimpleBottomNavigation" classname="createBaseline" time="0.7890" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Button/FlatButton" classname="createBaseline" time="0.8100" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Button/RaisedButton" classname="createBaseline" time="0.7650" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Checkbox/CheckedCheckbox" classname="createBaseline" time="0.6930" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Checkbox/DisabledCheckbox" classname="createBaseline" time="0.6950" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Checkbox/SimpleCheckbox" classname="createBaseline" time="0.6580" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Chip/DeletableAvatarChip" classname="createBaseline" time="0.6920" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Dialog/AlertDialog" classname="createBaseline" time="0.7730" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Divider/InsetDivider" classname="createBaseline" time="0.7070" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Divider/LightDivider" classname="createBaseline" time="0.6820" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Divider/SimpleDivider" classname="createBaseline" time="0.6660" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="IconButton/AccentIconButton" classname="createBaseline" time="0.6760" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="IconButton/ContrastIconButton" classname="createBaseline" time="0.6470" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="IconButton/DisabledIconButton" classname="createBaseline" time="0.6400" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="IconButton/SimpleIconButton" classname="createBaseline" time="0.6520" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Input/InputLabels" classname="createBaseline" time="0.7200" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Input/Inputs" classname="createBaseline" time="0.7170" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Input/InputSearch" classname="createBaseline" time="0.6480" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="LinearProgress/BufferLinearProgress" classname="createBaseline" time="0.6370" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="LinearProgress/DeterminateLinearProgress" classname="createBaseline" time="0.6760" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="ListItem/AvatarListItem" classname="createBaseline" time="0.7000" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="ListItem/IconListItem" classname="createBaseline" time="0.7050" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="ListItem/PrimaryActionCheckboxListItem" classname="createBaseline" time="0.7210" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="ListItem/SecondaryActionCheckboxListItem" classname="createBaseline" time="0.6940" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="ListItem/SimpleListItem" classname="createBaseline" time="0.6940" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="ListSubheader/InsetListSubheader" classname="createBaseline" time="0.6390" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="ListSubheader/PrimaryListSubheader" classname="createBaseline" time="0.6560" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="ListSubheader/SimpleListSubheader" classname="createBaseline" time="0.6590" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Menu/SimpleMenuList" classname="createBaseline" time="0.6820" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Paper/SimplePaper" classname="createBaseline" time="0.6720" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Radio/CheckedRadio" classname="createBaseline" time="0.7230" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Radio/DisabledRadio" classname="createBaseline" time="0.7360" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Radio/SimpleRadio" classname="createBaseline" time="0.6770" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="RadioGroup/RadioGroupWithLabel" classname="createBaseline" time="0.7800" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="RadioGroup/RadioGroupWithLabelError" classname="createBaseline" time="0.7060" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="RadioGroup/RadioGroupWithLabelRequired" classname="createBaseline" time="0.6930" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="RadioGroup/SimpleRadioGroup" classname="createBaseline" time="0.6600" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="SvgIcon/SimpleSvgIcon" classname="createBaseline" time="0.6690" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Switch/CheckedSwitch" classname="createBaseline" time="0.6510" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Switch/DisabledSwitch" classname="createBaseline" time="0.6770" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Switch/SimpleSwitch" classname="createBaseline" time="0.6480" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Tabs/SimpleTabs" classname="createBaseline" time="0.7070" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Text/TextTypes" classname="createBaseline" time="0.7520" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="TextField/TextFieldError" classname="createBaseline" time="0.6770" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="TextField/TextFieldRequired" classname="createBaseline" time="0.6750" assertions="1">
+
+    
+    </testcase>
+  
+
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>
